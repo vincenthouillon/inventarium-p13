@@ -1,0 +1,5 @@
+.vscode
+
+venv
+requirements-dev.txt
+private.json
