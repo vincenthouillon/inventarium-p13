@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+
+{% block head_title %}S'enregister{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Inscription</h1>
+        <h2>Créer votre compte.</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="row">
+                <div class="col-12 m-1">
+                    {{ field.label_tag }} {{ field }}
+                    <span class="help-text">{{ field.help_text }}</span>
+                </div>
+            </div>
+            <div class="col-12 m-0">
+                {% for error in field.errors %}
+                <p style="color: #d63031">⚠ {{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="sign-in">
+                <a href="{% url 'signin' %}">
+                    Se connecter à un compte existant</a>
+                <button class="btn btn-fill btn-sm" type="submit"><i class="fas fa-save"></i> S'enregister</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

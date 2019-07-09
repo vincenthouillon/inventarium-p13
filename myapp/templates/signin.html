@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+
+{% block head_title %}S'identifier{% endblock %}
+
+{% block content %}
+
+<div class="section">
+    <div class="container">
+            <h1 class="section-title">Connexion</h1>
+            <h2>Se connecter à votre compte.</h2>
+        <form id="login_form" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="sign-in">
+                    <a href="{% url 'signup' %}">
+                        Pas encore enregistré(e) ? </a>
+                    <button class="btn btn-fill btn-sm" type="submit"><i class="fas fa-save"></i> S'identifier</button>
+                </div>
+            <small class='text-muted ml-2'>
+                <a href="{% url 'homepage' %}">Mot de passe oublié ?</a>
+            </small>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

@@ -9,6 +9,10 @@ $muted-color: #2c3e50;
     padding: 0;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 .wrapper {
     min-height: 100vh;
     margin: 0;
@@ -28,63 +32,57 @@ $muted-color: #2c3e50;
     letter-spacing: 3px;
 }
 
-.section {
-    height: 100vh;
-    position: relative;
-}
 
 .btn-outline {
     background-color: #fff;
     border: 2px solid $primary-color;
-    border-radius: 20px;
+    border-radius: 5px;
     color: #000 !important;
+    font-size: 1rem;
     font-weight: 600;
-    text-transform: uppercase;
-    padding: 5px 20px !important;
-}
-
-.btn-outline:hover {
-    background-color: $primary-color;
-    color: #fff !important;
+    padding: 2px 20px !important;
+    transition: 0.4s all ease;
+    &:hover {
+        background-color: $primary-color;
+        color: #fff !important;
+    }
 }
 
 .btn-fill {
     background-color: $primary-color;
     border: 2px solid $primary-color;
-    border-radius: 20px;
+    border-radius: 5px;
     color: #fff;
+    font-size: 1rem;
     font-weight: 600;
-    text-transform: uppercase;
-    padding: 5px 20px;
+    padding: 2px 20px;
+    transition: 0.4s all ease;
+    &:hover {
+        background-color: $secondary-color;
+        border: 2px solid $secondary-color;
+        color: #fff;
+    }
 }
 
-.btn-fill:hover {
-    background-color: $secondary-color;
-    border: 2px solid $secondary-color;
-    color: #fff;
-}
-
-/* ----------- SECTION BANNER ----------- */
-.banner {
+/* -------------- SECTION -------------- */
+.section {
     background: #fff;
     padding: 20px 0 20px 0;
 }
 
-.banner-title {
-    color: $primary-color;
-    text-transform: uppercase;
+.section-title {
+    color: $muted-color;
+    &::after {
+        content: '';
+        background-color: $muted-color;
+        display: block;
+        height: 4px;
+        width: 40px;
+        margin: 20px 0;
+    }
 }
 
-.banner-title::after {
-    content: '';
-    background-color: $primary-color;
-    display: block;
-    height: 4px;
-    width: 40px;
-    margin: 20px 0;
-}
-
-.banner-img {
+.section-img {
     width: 80%;
     box-shadow: 0 0 15px rgba(34, 38, 42, 0.6);
     transform: rotate(2deg);
@@ -143,9 +141,27 @@ $muted-color: #2c3e50;
 
 .footer a {
     color: $muted-color;
+    &:hover {
+        text-decoration: none;
+        color: $secondary-color;
+        }
+    }
+
+
+/* -------------- FORMS SIGUP -------------- */
+.help-text {
+    font-size: 0.7em;
+  }
+
+.sign-in {
+    margin: 20px 0 20px 0;
 }
 
-.footer a:hover {
-    text-decoration: none;
-    color: $primary-color;
+.sign-in a {
+    color:$primary-color;
+    margin-right: 20px;
+    &:hover {
+        color: $secondary-color;
+        text-decoration: none;
+    }
 }

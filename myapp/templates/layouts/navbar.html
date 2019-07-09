@@ -12,11 +12,17 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">A propos</a>
+                        <a class="nav-link" href="{% url 'about' %}">A propos</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link btn-outline" href="#">Se connecter</a>
+                        <a class="nav-link btn-outline" href="{% url 'signout' %}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link btn-outline" href="{% url 'signin' %}"><i class="fas fa-sign-in-alt"></i> S'identifier</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
