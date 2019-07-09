@@ -1,0 +1,36 @@
+#nav-bar {
+    position: sticky;
+    height: 60px;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.navbar-brand {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff !important;
+    background-image: linear-gradient(to right, $primary-color, $secondary-color);
+    padding: 0 6px;
+}
+
+.nav-link {
+    font-size: 14px;
+    color: $muted-color !important;
+    margin-left: 20px;
+    padding: 7px 10px;
+    float: right;
+    text-align: left;
+}
+
+.nav-link:hover {
+    color: $secondary-color !important;
+}
+
+.navbar-toggler {
+    outline: none;
+}

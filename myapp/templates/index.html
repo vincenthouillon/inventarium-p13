@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="wrapper">
+    
+    {% include 'layouts/navbar.html' %}
+
+    <!---------------------------- SECTION BANNER ---------------------------->
+    <section class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2 class="banner-title">Inscrivez-vous !</h2>
+                    <p>
+                        <i class="fas fa-quote-left"></i>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem numquam maiores veniam, quis,
+                        ipsum
+                        sapiente atque consectetur, incidunt doloribus est eaque. Perspiciatis reiciendis, aperiam
+                        pariatur possimus saepe dolore libero quo.</p>
+
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem numquam maiores veniam, quis,
+                        ipsum
+                        sapiente atque consectetur, incidunt doloribus est eaque. Perspiciatis reiciendis, aperiam
+                        pariatur possimus saepe dolore libero quo.
+                        <i class="fas fa-quote-right"></i>
+                    </p>
+                    <button type="button" class="btn btn-fill btn-sm">S'inscrire</button>
+                </div>
+                <div class="col-md-7 text-center">
+                    <p><img class="banner-img" src="{% static 'img/houseCrossSection.jpg' %}"
+                            alt="Image maison coupe transversale"
+                            title="Designed by vectorpouch / Freepik"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- -------------------------- SECTION PROMOTE -------------------------- -->
+    <section class="explain">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h2>Lorem Ipsum</h2>
+                    <img src="https://imgplaceholder.com/250x250" alt="">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente laboriosam accusantium
+                        consequuntur quia
+                        labore porro maiores a amet!</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h2>Lorem Ipsum</h2>
+                    <img src="https://imgplaceholder.com/250x250" alt="">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente laboriosam accusantium
+                        consequuntur quia
+                        labore porro maiores a amet!</p>
+                </div>
+
+
+                <div class="col-md-4">
+                    <h2>Lorem Ipsum</h2>
+                    <img src="https://imgplaceholder.com/250x250" alt="">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente laboriosam accusantium
+                        consequuntur quia
+                        labore porro maiores a amet!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!------------------------------- FOOTER ----------------------------->
+    <footer class="footer">
+        <div class="container-fluid text-center">
+            <p>&copy; 2019 Houillon Vincent. Tous droits réservés. &nbsp; // &nbsp; <a
+                    href="https://github.com/vincenthouillon/" target="blank"><i class="fab fa-github"></i>
+                    Github</a></p>
+        </div>
+    </footer>
+</div>
+
+{% endblock content %}

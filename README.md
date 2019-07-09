@@ -9,8 +9,8 @@
     <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/django.svg">
     <a href="https://openclassrooms.com/fr/paths/68-developpeur-dapplication-python" alt="OpenClassrooms">
         <img src="https://img.shields.io/badge/OpenClassrooms-DA%20Python%20P13-blueviolet.svg"></a>
-    <a href="https://github.com/vincenthouillon/inventarium-p13/blob/master/LICENSE"><img alt="GitHub license"
-            src="https://img.shields.io/github/license/vincenthouillon/invetarium-p13.svg"></a>
+    <!-- <a href="https://github.com/vincenthouillon/inventarium-p13/blob/master/LICENSE"><img alt="GitHub license"
+            src="https://img.shields.io/github/license/vincenthouillon/invetarium-p13.svg"></a> -->
 </p>
 
 > :construction: Project under construction
