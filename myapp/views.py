@@ -15,13 +15,14 @@ def homepage(request):
     template_name = 'index.html'
     return render(request, template_name)
 
+
 def about(request):
     """Display about page."""
     template_name = 'about.html'
     return render(request, template_name)
 
 
-def signup(request):
+def register(request):
     """User registration page."""
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -35,7 +36,7 @@ def signup(request):
     else:
         form = SignupForm()
 
-    template_name = 'signup.html'
+    template_name = 'register.html'
     context = {
         'form': form,
         'title': "S'enregister"

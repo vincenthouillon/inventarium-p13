@@ -1,3 +1,199 @@
-#nav-bar{position:-webkit-sticky;position:sticky;height:60px;top:0;z-index:10}.navbar{background-color:rgba(255,255,255,0.95)}.navbar-brand{font-size:16px;font-weight:600;text-transform:uppercase;color:#fff !important;background-image:-webkit-gradient(linear, left top, right top, from(#8e44ad), to(#5f1782));background-image:linear-gradient(to right, #8e44ad, #5f1782);padding:0 6px}.nav-link{font-size:14px;color:#2c3e50 !important;margin-left:20px;padding:7px 10px;float:right;text-align:left}.nav-link:hover{color:#5f1782 !important}.navbar-toggler{outline:none}*{margin:0;padding:0}a{text-decoration:none !important}.wrapper{min-height:100vh;margin:0;position:relative}.state{position:absolute;top:35px;left:-35px;padding:2px 20px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);font-size:12px;text-transform:uppercase;background-color:#2c3e50;color:#fff;letter-spacing:3px}.btn-outline{background-color:#fff;border:2px solid #8e44ad;border-radius:5px;color:#000 !important;font-size:1rem;font-weight:600;padding:2px 20px !important;-webkit-transition:0.4s all ease;transition:0.4s all ease}.btn-outline:hover{background-color:#8e44ad;color:#fff !important}.btn-fill{background-color:#8e44ad;border:2px solid #8e44ad;border-radius:5px;color:#fff;font-size:1rem;font-weight:600;padding:2px 20px;-webkit-transition:0.4s all ease;transition:0.4s all ease}.btn-fill:hover{background-color:#5f1782;border:2px solid #5f1782;color:#fff}.section{background:#fff;padding:20px 0 20px 0}.section-title{color:#2c3e50}.section-title::after{content:'';background-color:#2c3e50;display:block;height:4px;width:40px;margin:20px 0}.section-img{width:80%;-webkit-box-shadow:0 0 15px rgba(34,38,42,0.6);box-shadow:0 0 15px rgba(34,38,42,0.6);-webkit-transform:rotate(2deg);transform:rotate(2deg);border-radius:5px;border:4px solid #fff;margin-top:20px}.content{padding:10px 0 60px 0}.list-equipment{list-style:none}.list-equipment li{border-bottom:1px solid #dedede;padding:12px 0}.table th{background-color:#5f1782;color:#fff;padding:5px;font-weight:600}.table td{padding:10px 5px 0 5px}.explain{position:relative;height:100%;padding:20px 0 80px 0}.footer{position:absolute;bottom:0;left:0;right:0;padding-top:12px;font-size:11px;color:#2c3e50}.footer a{color:#2c3e50}.footer a:hover{text-decoration:none;color:#5f1782}.help-text{font-size:0.7em}.sign-in{margin:20px 0 20px 0}.sign-in a{color:#8e44ad;margin-right:20px}.sign-in a:hover{color:#5f1782;text-decoration:none}
+#nav-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  height: 60px;
+  top: 0;
+  z-index: 10; }
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95); }
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #2c3e50 !important;
+  padding: 0 6px; }
+
+.nav-link {
+  font-size: 14px;
+  color: #7f8c8d !important;
+  margin-left: 20px;
+  padding: 7px 10px;
+  float: right;
+  text-align: left; }
+
+.nav-link:hover {
+  color: #ed4d71 !important; }
+
+.navbar-toggler {
+  outline: none; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none !important;
+  color: #ed4d71; }
+  a:hover {
+    color: #BA1A3E; }
+
+p {
+  color: #34495e; }
+
+.wrapper {
+  min-height: 100vh;
+  margin: 0;
+  position: relative; }
+
+.state {
+  position: absolute;
+  top: 35px;
+  left: -35px;
+  padding: 2px 20px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  font-size: 12px;
+  text-transform: uppercase;
+  background-color: #2c3e50;
+  color: #fff;
+  letter-spacing: 3px; }
+
+.btn-outline {
+  background-color: #fff;
+  border: 1px solid #ed4d71;
+  border-radius: 2px;
+  color: #ed4d71 !important;
+  font-size: 16px;
+  padding: 3px 15px !important;
+  -webkit-transition: 0.4s all ease;
+  transition: 0.4s all ease; }
+  .btn-outline:hover {
+    background-color: #ed4d71;
+    color: #fff !important; }
+
+.btn-fill {
+  background-color: #ed4d71;
+  border: 2px solid #ed4d71;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 2px 10px;
+  -webkit-transition: 0.4s all ease;
+  transition: 0.4s all ease; }
+  .btn-fill:hover {
+    background-color: #BA1A3E;
+    border: 2px solid #BA1A3E;
+    color: #fff; }
+
+/* -------------- SECTION -------------- */
+.section {
+  padding: 20px 0 30px 0; }
+  .section::before {
+    content: "";
+    -webkit-transform: translate(-45%);
+            transform: translate(-45%);
+    top: 150px;
+    position: absolute;
+    background-image: url("../img/dots-banner.svg");
+    background-repeat: no-repeat;
+    width: 165px;
+    height: 225px; }
+
+.section-title {
+  color: #2c3e50; }
+  .section-title::after {
+    content: '';
+    background-color: #2c3e50;
+    display: block;
+    height: 4px;
+    width: 40px;
+    margin: 20px 0; }
+
+.section-subtitle {
+  color: #2c3e50;
+  padding-bottom: 10px; }
+
+.section-img {
+  width: 80%;
+  -webkit-box-shadow: 0 0 15px rgba(34, 38, 42, 0.6);
+          box-shadow: 0 0 15px rgba(34, 38, 42, 0.6);
+  border-radius: 5px;
+  margin-top: 20px; }
+
+/* ----------- SECTION CONTENT ----------- */
+.content {
+  /* position: relative; */
+  padding: 10px 0 60px 0; }
+
+.list-equipment {
+  list-style: none; }
+
+.list-equipment li {
+  border-bottom: 1px solid #dedede;
+  padding: 12px 0; }
+
+.table th {
+  background-color: #BA1A3E;
+  color: #fff;
+  padding: 5px;
+  font-weight: 600; }
+
+.table td {
+  padding: 10px 5px 0 5px; }
+
+/* ---------------- STEPS ---------------- */
+.explain {
+  position: relative;
+  height: 100%;
+  padding: 40px 0 20px 0; }
+  .explain::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+            transform: translate(-50%);
+    width: 400px;
+    height: 1px;
+    background-color: #dedede; }
+
+.explain img {
+  width: 330px;
+  margin: 10px 0;
+  border-radius: 2px;
+  border: 1px solid #34495e; }
+
+/* ---------------- FOOTER ---------------- */
+.footer {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  padding-top: 12px;
+  font-size: 11px;
+  color: #2c3e50; }
+
+.footer a {
+  color: #2c3e50; }
+  .footer a:hover {
+    text-decoration: none;
+    color: #BA1A3E; }
+
+/* -------------- FORMS SIGUP -------------- */
+.help-text {
+  font-size: 0.7em;
+  color: #7f8c8d; }
+
+.sign-in {
+  margin: 20px 0 20px 0; }
+
+.sign-in a {
+  margin-right: 20px; }
+
+input {
+  padding-left: 5px; }
 
 /*# sourceMappingURL=style.css.map */

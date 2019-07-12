@@ -7,12 +7,12 @@
 <div class="section">
     <div class="container">
             <h1 class="section-title">Connexion</h1>
-            <h2>Se connecter à votre compte.</h2>
+            <h2 class="section-subtitle">Se connecter à votre compte.</h2>
         <form id="login_form" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="sign-in">
-                    <a href="{% url 'signup' %}">
+                    <a href="{% url 'register' %}">
                         Pas encore enregistré(e) ? </a>
                     <button class="btn btn-fill btn-sm" type="submit"><i class="fas fa-save"></i> S'identifier</button>
                 </div>
