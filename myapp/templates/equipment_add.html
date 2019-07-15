@@ -1,0 +1,16 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}Mise à jour du compte{% endblock %}
+{% block content %}
+<div class="section">
+    <div class="container">
+        <h1 class="section-title">Nouvel équipement</h1>
+        <form method="post" enctype="multipart/form-data" class="col-lg-5 col-sm-12">
+            {% csrf_token %}
+            {{ form | crispy }}
+
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-sm">Annuler</a>
+            <button type="submit" class="btn btn-fill btn-sm">Ajouter</button>
+        </form>
+
+{% endblock content %}

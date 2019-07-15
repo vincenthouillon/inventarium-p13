@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}Mise à jour du compte{% endblock %}
+{% block content %}
+<div class="section">
+    <div class="container">
+        <h1 class="section-title">Mon compte</h1>
+        <h2 class="section-subtitle">Information sur votre compte.</h2>
+        <form method="POST" class="col-lg-5 col-sm-12">
+            {% csrf_token %}
+            {{ u_form | crispy}}
+            <div class="sign-in">
+                <a href="{% url 'profile' %}" class="btn btn-secondary">Annuler</a>
+                <button class="btn btn-fill btn-sm" type="submit" onclick="return confirm('Etes-vous sûr ?')">
+                    <i class="fas fa-save"></i> Mettre à jour</button>
+                </div>
+        </form>
+{% endblock content %}

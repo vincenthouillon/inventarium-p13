@@ -1,16 +1,15 @@
 {% extends 'layouts/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block head_title %}S'identifier{% endblock %}
-
 {% block content %}
 
 <div class="section">
     <div class="container">
             <h1 class="section-title">Connexion</h1>
             <h2 class="section-subtitle">Se connecter à votre compte.</h2>
-        <form id="login_form" method="POST">
+        <form id="login_form" method="POST" class="col-lg-5 col-sm-12">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form | crispy }}
             <div class="sign-in">
                     <a href="{% url 'register' %}">
                         Pas encore enregistré(e) ? </a>

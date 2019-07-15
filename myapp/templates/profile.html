@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html' %}
+{% block head_title %}Mon compte{% endblock %}
+{% block content %}
+<div class="section">
+    <div class="container">
+        <h1 class="section-title">Mon compte</h1>
+        <h2 class="section-subtitle">Information sur votre compte.</h2>
+        <table class="table col-lg-6 col-sm-12">
+            <tr>
+                <td>Identifiant</td>
+                <td>
+                    <b>{{ user.username }}</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Nom</td>
+                <td>
+                    <b>{{ user.last_name }}</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Prénom</td>
+                <td>
+                    <b>{{ user.first_name }}</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Adresse électronique</td>
+                <td>
+                    <b>{{ user.email }}
+                </td></b>
+            </tr>
+            <tr>
+                <td>Date d'inscription</td>
+                <td>
+                    <b>{{ user.date_joined }}</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Dernière connexion</td>
+                <td>
+                    <b>{{ user.last_login }}</b>
+                </td>
+            </tr>
+        </table>
+        <div class="sign-in">
+            <a href="{% url 'register_update' %}" class="btn btn-fill btn-sm">
+                Mettre à jour</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

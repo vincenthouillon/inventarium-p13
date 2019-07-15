@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+{% block head_title %}Mon tableau de bord{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="section-title">Mon tableau de bord</h1>
+        {% if not room %}
+            room: {{ room }}
+        {% else %}
+            <p>Oups! Vous n'avez aucune pièce d'enregistrée !</p>
+        {% endif %}
+        <a href="{% url 'room_add' %}" class="btn btn-fill">Ajouter une pièce</a>
+        <hr>
+        {% if not equipment %}
+            Equipement: {{ equipment }}
+        {% else %}
+            <p>Oups! Vous n'avez aucun equipement enregistré !</p>
+        {% endif %}
+        <a href="{% url 'equipment_add' %}" class="btn btn-fill">Ajouter un equipement</a>
+    {% endblock content %}
+    </div>
