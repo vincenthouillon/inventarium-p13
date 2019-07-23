@@ -22,7 +22,15 @@
                     pariatur possimus saepe dolore libero quo.
                     <i class="fas fa-quote-right"></i>
                 </p>
-                <a class="btn btn-fill btn-sm" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> S'inscrire</a>
+
+                {% if user.is_authenticated %}
+                <a class="btn btn-primo btn-sm" href="{% url 'profile' %}"><i class="fas fa-user-plus"></i>
+                    S'inscrire</a>
+                {% else %}
+                    <a class="btn btn-primo btn-sm" href="{% url 'register' %}"><i class="fas fa-user-plus"></i>
+                        S'inscrire</a>
+                {% endif %}
+
             </div>
             <div class="col-md-7 text-center">
                 <p><img class="section-img" src="{% static 'img/houseCrossSection.jpg' %}"

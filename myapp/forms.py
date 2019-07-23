@@ -3,11 +3,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Equipment, Room, Room_type
+from .models import Equipment, Room, Residence
 
 # User registration form
-
-
 class UserRegisterForm(UserCreationForm):
     """Form used to register a user."""
     email = forms.EmailField(
@@ -32,16 +30,17 @@ class UserUpdateForm(forms.ModelForm):
 class EquipmentForm(forms.ModelForm):
     class Meta:
         model = Equipment
-        fields = ('name', 'brand', 'model', 'date_purchase', 'lenght_warranty',
-                  'note', 'picture', 'invoice', 'manual', 'active', 'room', 'category')
+        fields = '__all__'
 
 
 class RoomForm(forms.ModelForm):
     class Meta:
         model = Room
-        fields = ('name', 'picture', 'residence', 'room_type')
+        exclude = ['residence']
 
-class RoomTypeForm(forms.ModelForm):
+
+class ResidenceForm(forms.ModelForm):
     class Meta:
-        model = Room_type
-        fields = ('name',)
+        model = Residence
+        exclude = ['user']
+

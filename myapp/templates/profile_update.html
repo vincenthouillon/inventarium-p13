@@ -10,8 +10,8 @@
             {% csrf_token %}
             {{ u_form | crispy}}
             <div class="sign-in">
-                <a href="{% url 'profile' %}" class="btn btn-secondary">Annuler</a>
-                <button class="btn btn-fill btn-sm" type="submit" onclick="return confirm('Etes-vous sûr ?')">
+                <a href="{% url 'profile' %}" class="btn btn-secondary btn-sm">Annuler</a>
+                <button class="btn btn-primo btn-sm" type="submit" onclick="return confirm('Etes-vous sûr ?')">
                     <i class="fas fa-save"></i> Mettre à jour</button>
                 </div>
         </form>

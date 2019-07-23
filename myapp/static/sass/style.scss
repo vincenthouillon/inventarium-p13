@@ -43,13 +43,10 @@ p {
 }
 
 
-.btn-outline {
+.btn-outline-primo {
     background-color: #fff;
     border: 1px solid $primary-color;
-    border-radius: 2px;
     color: $primary-color !important;
-    font-size: 16px;
-    padding: 3px 15px !important;
     transition: 0.4s all ease;
     &:hover {
         background-color: $primary-color;
@@ -57,18 +54,14 @@ p {
     }
 }
 
-.btn-fill {
+.btn-primo {
     background-color: $primary-color;
-    border: 2px solid $primary-color;
-    border-radius: 2px;
+    border: 1px solid $primary-color;
     color: #fff;
-    font-size: 1rem;
-    font-weight: 400;
-    padding: 2px 10px;
     transition: 0.4s all ease;
     &:hover {
         background-color: $secondary-color;
-        border: 2px solid $secondary-color;
+        border: 1px solid $secondary-color;
         color: #fff;
     }
 }

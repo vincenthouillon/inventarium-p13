@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <h1>Pièce(s) de la résidence : {{ residence }}</h1>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Provident deserunt nostrum voluptatibus assumenda,
+            itaque a hic quasi molestiae eaque voluptate excepturi rerum,
+            omnis perspiciatis quos tempore dolores, possimus accusamus nam.</p>
+       
+            <a href="{% url 'residence_update' residence.id %}" class="btn btn-secondary btn-sm">mettre à jour</a>
+
+    <hr>
+    {% if rooms %}
+        {% for room in rooms %}
+            <a href="{% url 'room' room.0 %}"
+            class="btn btn-outline-primary btn-sm">
+            {{ room.1 }} <span class="badge badge-primary">{{ room.2 }}</span></a>
+        {% endfor %}
+    {% else %}
+        <p class="text-danger">Vous n'avez pas de pièce(s) enregistrée(s) pour le moment.</p>
+    {% endif %}
+        <a href="{% url 'room_add' residence.id %}" class="btn btn-primary btn-sm">ajouter</a>
+
+
+</div>
+
+{% endblock content %}

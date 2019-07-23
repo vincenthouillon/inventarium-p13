@@ -1,18 +1,23 @@
 # https://docs.djangoproject.com/fr/2.2/topics/db/models/
+from datetime import datetime
+
 from django.contrib import admin
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from django.db import models
-from datetime import datetime
 
 
 class Residence(models.Model):
     """Residence data table."""
     name = models.CharField(
         "nom de la résidence", max_length=45)
-    adress = models.CharField("adresse", max_length=80, null=True)
-    zip_code = models.IntegerField("code postal", null=True)
-    city = models.CharField("ville", max_length=45, null=True)
-    # Relation ################################################################
+    adress = models.CharField("adresse", max_length=80, null=True, blank=True)
+    zip_regex = RegexValidator(
+        regex=r'^\d{5}$', message="Le code postal doit être au format 99999, exemple : '75000'.")
+    zip_code = models.CharField("code postal", validators=[
+                                zip_regex], max_length=5, null=True, blank=True)
+    city = models.CharField("ville", max_length=45, null=True, blank=True)
+
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="utilisateur")
 
@@ -23,31 +28,15 @@ class Residence(models.Model):
         verbose_name = "résidence"
 
 
-class Room_type(models.Model):
-    """Data table of the room types of the house"""
-    name = models.CharField(
-        "type de pièce", max_length=80, unique=True)
-    default_picture = models.ImageField(upload_to='room/default',
-        null=True, verbose_name="image par défaut", default="default/default.jpg")
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "type de pièce"
-
-
 class Room(models.Model):
     """Data table of rooms in the house."""
     name = models.CharField(
-        "Nom de la pièce", max_length=80, unique=True)
+        "Nom de la pièce", max_length=80)
     picture = models.ImageField(
         upload_to="rooms/picture", null=True, blank=True, verbose_name="Image")
-    # Relation ################################################################
+
     residence = models.ForeignKey(
         Residence, on_delete=models.CASCADE, verbose_name="résidence")
-    room_type = models.ForeignKey(
-        Room_type, on_delete=models.CASCADE, verbose_name="type de pièce")
 
     def __str__(self):
         return self.name
@@ -83,8 +72,8 @@ class Equipment(models.Model):
         upload_to="equipements/invoice", null=True, blank=True, verbose_name="facture")
     manual = models.FileField(upload_to="equipements/manual",
                               null=True, blank=True, verbose_name="mode d'emploi")
-    active = models.BooleanField("Equipement actif", default=1)
-    # Relation ################################################################
+    is_active = models.BooleanField("Equipement actif", default=1)
+
     room = models.ForeignKey(
         Room, on_delete=models.CASCADE, verbose_name="pièce")
     category = models.ForeignKey(

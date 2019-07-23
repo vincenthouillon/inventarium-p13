@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}Mise à jour d'une pièce{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>Liste des équipements de : {{ room }} dans {{ room.residence }}</h1>
+    <a href="{% url 'room_update' room.id %}" class="btn btn-secondary btn-sm">mettre à jour</a>
+    
+    <h1>Equipement(s)</h2>
+        {% if equipments %}
+        {% for equipment in equipments %}
+        <a href="{% url 'equipment' equipment.id %}" class="btn btn-outline-primary btn-sm">{{ equipment }}</a>
+        {% endfor %}
+        {% else %}
+        <p class="text-danger">Vous n'avez pas d'équipement(s) enregistré(s) pour le moment.</p>
+        {% endif %}
+
+        <a href="{% url 'equipment_add' room.id %}" class="btn btn-primary btn-sm">Ajouter</a>
+</div>
+
+{% endblock content %}

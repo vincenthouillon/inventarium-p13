@@ -16,13 +16,13 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link btn-outline dropdown-toggle" 
+                    <a class="nav-link btn btn-outline-primo dropdown-toggle font-weight-bold" 
                     id="navbarDropdown"
                     data-toggle="dropdown" 
                     aria-haspopup="true"
                     aria-expanded="false"
                     href="#">{{ user.username }}</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{% url 'profile' %}">Mon compte</a>
                             <a class="dropdown-item" href="{% url 'dashboard' %}">Mon tableau de bord</a>
                             <div class="dropdown-divider"></div>
@@ -31,7 +31,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item mr-4">
-                    <a class="nav-link btn-outline" href="{% url 'signin' %}"><i class="fas fa-sign-in-alt"></i> S'identifier</a>
+                    <a class="nav-link btn btn-outline-primo" href="{% url 'signin' %}"><i class="fas fa-sign-in-alt"></i> S'identifier</a>
                 </li>
                 {% endif %}
             </ul>

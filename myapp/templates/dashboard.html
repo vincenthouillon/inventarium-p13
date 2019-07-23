@@ -3,18 +3,16 @@
 {% block content %}
     <div class="container">
         <h1 class="section-title">Mon tableau de bord</h1>
-        {% if not room %}
-            room: {{ room }}
+        {% if residences %}
+        {% for residence in residences %}
+            <a href="{% url 'residence' residence.0 %}" 
+            class="btn btn-outline-primary btn-sm mr-2">{{ residence.1 }}
+            <span class="badge badge-primary">{{ residence.2 }}</span></a>
+        {% endfor %}
+            <a href="{% url 'residence_add' %}"><i class="fas fa-plus-circle"></i></a>
         {% else %}
-            <p>Oups! Vous n'avez aucune pièce d'enregistrée !</p>
+            <p>Oups! Vous n'avez aucune résidence d'enregistrée !</p>
+            <a href="{% url 'residence_add' %}" class="btn btn-primo">Ajouter une résidence</a>
         {% endif %}
-        <a href="{% url 'room_add' %}" class="btn btn-fill">Ajouter une pièce</a>
-        <hr>
-        {% if not equipment %}
-            Equipement: {{ equipment }}
-        {% else %}
-            <p>Oups! Vous n'avez aucun equipement enregistré !</p>
-        {% endif %}
-        <a href="{% url 'equipment_add' %}" class="btn btn-fill">Ajouter un equipement</a>
-    {% endblock content %}
     </div>
+{% endblock content %}

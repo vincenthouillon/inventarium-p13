@@ -8,12 +8,12 @@
             <h1 class="section-title">Connexion</h1>
             <h2 class="section-subtitle">Se connecter à votre compte.</h2>
         <form id="login_form" method="POST" class="col-lg-5 col-sm-12">
-            {% csrf_token %}
             {{ form | crispy }}
+            {% csrf_token %}
             <div class="sign-in">
                     <a href="{% url 'register' %}">
                         Pas encore enregistré(e) ? </a>
-                    <button class="btn btn-fill btn-sm" type="submit"><i class="fas fa-save"></i> S'identifier</button>
+                    <button class="btn btn-primo btn-sm" type="submit"><i class="fas fa-sign-in-alt"></i> S'identifier</button>
                 </div>
             <small class='text-muted ml-2'>
                 <a href="{% url 'homepage' %}">Mot de passe oublié ?</a>
