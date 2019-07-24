@@ -59,13 +59,14 @@ class Category(models.Model):
 class Equipment(models.Model):
     """Data table of the equipment of the house."""
     name = models.CharField("nom de l'équipement", max_length=80)
-    brand = models.CharField("marque", max_length=30)
-    model = models.CharField("modèle", max_length=40)
+    brand = models.CharField("marque", max_length=30, null=True, blank=True)
+    model = models.CharField("modèle", max_length=40, null=True, blank=True)
     date_purchase = models.DateField(
         "date d'achat", blank=True, default=datetime.now)
     lenght_warranty = models.IntegerField(
-        "durée de garantie", null=True, help_text="Durée exprimée en mois", default="48")
-    note = models.TextField("remarque", null=True)
+        "durée de garantie", null=True, help_text="Durée exprimée en mois",
+        default="48", blank=True)
+    note = models.TextField("remarque", null=True, blank=True)
     picture = models.ImageField(
         upload_to="equipments/picture", null=True, blank=True, verbose_name="photo")
     invoice = models.FileField(

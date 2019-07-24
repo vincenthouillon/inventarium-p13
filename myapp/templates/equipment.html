@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}Liste des équipements{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Liste des équipements de : {{ equipment }} dans {{ equipment.room }}</h1>
+    <a href="{% url 'equipment_update' equipment.id %}" class="btn btn-secondary btn-sm">mettre à jour</a>
+    <h2>Equipement(s)</h2>
+    <ul>
+        <li>{{ equipment }}</li>
+        <li>{{ equipment.brand }}</li>
+        <li>{{ equipment.modele }}</li>
+        <li>{{ equipment.date_purchase }}</li>
+        <li>{{ equipment.lenght_warranty }} mois</li>
+        <li>{{ equipment.note }}</li>
+    </ul>
+
+</div>
+
+{% endblock content %}

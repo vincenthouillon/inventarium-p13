@@ -30,7 +30,7 @@ class UserUpdateForm(forms.ModelForm):
 class EquipmentForm(forms.ModelForm):
     class Meta:
         model = Equipment
-        fields = '__all__'
+        exclude = ['room']
 
 
 class RoomForm(forms.ModelForm):

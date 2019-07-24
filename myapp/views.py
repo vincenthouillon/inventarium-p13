@@ -106,7 +106,7 @@ def profile_update(request):
     return render(request, 'profile_update.html', {'u_form': u_form})
 # endregion
 
-
+# region: display pages
 @login_required
 def dashboard(request):
     """Display the user account page."""
@@ -223,7 +223,7 @@ def room_add(request, residence_id):
 
     return render(request, 'room_add.html', {
         'form': RoomForm,
-        'residence_id': get_residence
+        'residence': get_residence
     })
 
 
@@ -248,7 +248,7 @@ def room_update(request, room_id):
 
         return render(request, 'room_add.html', {
             'form': u_form,
-            'residence_id': get_room.residence
+            'residence': get_room.residence
         })
     else:
         raise Http404()
@@ -272,7 +272,7 @@ def equipment_add(request, room_id):
                 u_form = EquipmentForm()
 
         return render(request, 'equipment_add.html', {
-            'equipmentform': EquipmentForm,
+            'form': EquipmentForm,
             'residence_id': get_room,
         })
 
@@ -298,8 +298,8 @@ def equipment_update(request, equipment_id):
             u_form = EquipmentForm(instance=get_equipment)
 
         return render(request, 'equipment_add.html', {
-            'equipmentform': u_form,
-            'residence_id': get_equipment,
+            'form': u_form,
+            'residence': get_equipment,
         })
 
     else:

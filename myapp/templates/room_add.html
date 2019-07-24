@@ -5,11 +5,11 @@
 
 
 <div class="container">
-    <h1 class="section-title">Nouvelle pièce pour {{ residence_id }}</h1>
+    <h1 class="section-title">Nouvelle pièce pour {{ residence }}</h1>
     <form method="post" enctype="multipart/form-data" class="col-lg-5 col-sm-12">
         {% csrf_token %}
         {{ form | crispy }}
-        <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-sm">Annuler</a>
+        <a href="{% url 'residence' residence.id %}" class="btn btn-secondary btn-sm">Annuler</a>
         <button type="submit" class="btn btn-primo btn-sm">Ajouter</button>
     </form>
 
