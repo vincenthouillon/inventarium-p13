@@ -10,10 +10,10 @@
         <li class="breadcrumb-item active" aria-current="page">Acceuil</li>
       </ol>
     </nav>
-    <h1 class="section-title">Accueil</h1>
+    <h1 class="section-title">Mes résidences</h1>
     {% if residences %}
     <div class="card-columns card-deck">
-      <div class="card" style="max-width: 20rem;">
+      <div class="card" style="max-width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Ajouter une résidence</h5>
           <p class="card-tex text-center">
@@ -22,9 +22,8 @@
             </a></p>
         </div>
       </div>
-
       {% for residence in residences %}
-      <div class="card" style="max-width: 20rem;">
+      <div class="card" style="max-width: 18rem;">
         <a href="{% url 'residence' residence.id %}">
           <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
           <div class="card-body">
@@ -32,27 +31,28 @@
             <p class="card-text">{{ residence.adress|truncatechars:50 }}</p>
             <p class="card-text">{{ residence.zip_code }} {{ residence.city }}</p>
         </a>
-        <div class="card-text text-right">
+        <div class="card-text text-right mt-2">
           <a href="{% url 'residence_update' residence.id %}" class="btn btn-secondary btn-sm">Modifier</a>
+          <a href="#" class="btn btn-danger btn-sm">Supprimer</a>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-
   {% else %}
-  <p>Oups! Vous n'avez aucune résidence d'enregistrée !</p>
   <div class="card-columns card-deck">
-    <div class="card" style="max-width: 20rem;">
+    <div class="card" style="max-width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Ajouter une résidence</h5>
         <p class="card-tex text-center">
           <a href="{% url 'residence_add' %}" class="stretched-link" style="font-size: 120px"><i
               class="fas fa-plus-circle"></i>
           </a></p>
+          <p>Oups! Vous n'avez aucune résidence d'enregistrée !</p>
       </div>
     </div>
-    {% endif %}
+  </div>
+  {% endif %}
   </div>
 </section>
 

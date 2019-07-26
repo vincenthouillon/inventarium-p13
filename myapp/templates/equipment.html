@@ -1,19 +1,21 @@
 {% extends 'layouts/base.html' %}
-{% load crispy_forms_tags %}
 {% load static %}
-{% block head_title %}Liste des équipements{% endblock %}
+{% load crispy_forms_tags %}
+{% block head_title %}Equipement(s){% endblock %}
 {% block content %}
 
 <div class="section">
   <div class="container">
-      <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'residence' equipment.room.residence.id %}">{{ equipment.room.residence.name|capfirst }}</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'room' equipment.room.id %}">{{ equipment.room|capfirst }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ equipment.name|capfirst }}</li>
-          </ol>
-        </nav>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
+        <li class="breadcrumb-item"><a
+            href="{% url 'residence' equipment.room.residence.id %}">{{ equipment.room.residence.name|capfirst }}</a>
+        </li>
+        <li class="breadcrumb-item"><a href="{% url 'room' equipment.room.id %}">{{ equipment.room|capfirst }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ equipment.name|capfirst }}</li>
+      </ol>
+    </nav>
     <h1 class="section-title">Equipements situé dans : {{ equipment.room|capfirst }}</h1>
     <div class="row">
       <div class="col-lg-6 col-sm-12">
@@ -24,7 +26,6 @@
       <div class="col-lg-6 col-sm-12">
         <h2 class="section-subtitle">{{ equipment.name|capfirst }}</h2>
         <p>{{ equipment.note }}</p>
-
         <table class="table-sm mb-2">
           <tr>
             <td class="small font-weight-bold">Marque :</td>
@@ -62,7 +63,6 @@
         <a href="{% url 'equipment_update' equipment.id %}" class="btn btn-secondary btn-sm">Modifier</a>
         <a href="#" class="btn btn-danger btn-sm">Supprimer</a>
       </div>
-
     </div>
   </div>
 </div>
