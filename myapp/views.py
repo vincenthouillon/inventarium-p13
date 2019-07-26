@@ -112,12 +112,7 @@ def dashboard(request):
     """Display the user account page."""
     qs_residences = Residence.objects.filter(user=request.user)
 
-    residence_list = list()
-    for counter, residence in enumerate(qs_residences):
-        room = Room.objects.filter(residence_id=qs_residences[counter])
-        residence_list.append((residence.id, residence.name, room.count()))
-
-    return render(request, 'dashboard.html', {'residences': residence_list, })
+    return render(request, 'dashboard.html', {'residences': qs_residences, })
 
 
 @login_required
@@ -125,14 +120,15 @@ def residence(request, residence_id):
     """Display the rooms."""
     get_residence = get_object_or_404(
         Residence, id=residence_id, user=request.user)
+    rooms = Room.objects.filter(residence=get_residence)
 
-    rooms_list = list()
-    for room in Room.objects.filter(residence=get_residence):
-        rooms_list.append((room.id, room, Equipment.objects.filter(
-            room=room).count(), residence))
+    # rooms_list = list()
+    # for room in Room.objects.filter(residence=get_residence):
+    #     rooms_list.append((room.id, room, Equipment.objects.filter(
+    #         room=room).count(), residence))
 
     return render(request, 'residence.html', {
-        'rooms': rooms_list,
+        'rooms': rooms,
         'residence': get_residence,
     })
 
@@ -273,7 +269,7 @@ def equipment_add(request, room_id):
 
         return render(request, 'equipment_add.html', {
             'form': EquipmentForm,
-            'residence_id': get_room,
+            'room_id': get_room,
         })
 
     else:

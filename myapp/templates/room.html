@@ -1,22 +1,55 @@
 {% extends 'layouts/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block head_title %}Mise à jour d'une pièce{% endblock %}
 {% block content %}
 
-<div class="container">
-    <h1>Liste des équipements de : {{ room }} dans {{ room.residence }}</h1>
-    <a href="{% url 'room_update' room.id %}" class="btn btn-secondary btn-sm">mettre à jour</a>
-    
-    <h1>Equipement(s)</h2>
-        {% if equipments %}
-        {% for equipment in equipments %}
-        <a href="{% url 'equipment' equipment.id %}" class="btn btn-outline-primary btn-sm">{{ equipment }}</a>
-        {% endfor %}
-        {% else %}
-        <p class="text-danger">Vous n'avez pas d'équipement(s) enregistré(s) pour le moment.</p>
-        {% endif %}
+<section class="section">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'residence' room.residence.id %}">{{ room.residence.name }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ room.name }}</li>
+      </ol>
+    </nav>
 
-        <a href="{% url 'equipment_add' room.id %}" class="btn btn-primary btn-sm">Ajouter</a>
-</div>
+    <h1 class="section-title">Liste des équipements de : {{ room|capfirst }}</h1>
+    <!-- <a href="{% url 'room_update' room.id %}" class="btn btn-secondary btn-sm">Modifier</a> -->
+
+    {% if equipments %}
+    <div class="card-columns card-deck">
+      <div class="card" style="max-width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">Ajouter un équipement</h5>
+          <p class="card-tex text-center">
+            <a href="{% url 'equipment_add' room.id %}" class="stretched-link" style="font-size: 120px"><i
+                class="fas fa-plus-circle"></i>
+            </a></p>
+        </div>
+      </div>
+      {% for equipment in equipments %}
+
+      <div class="card" style="max-width: 20rem;">
+        <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ equipment.name|capfirst }}</h5>
+          <p class="card-text">{{ equipment.note|truncatechars:50 }}</p>
+          <div class="card-text text-right">
+            <a href="{% url 'equipment' equipment.id %}" class="btn btn-primary stretched-link">Plus</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <a href="{% url 'equipment' equipment.id %}" class="btn btn-outline-primary btn-sm">{{ equipment }}</a>
+    {% endfor %}
+    {% else %}
+    <p class="text-danger">Vous n'avez pas d'équipement(s) enregistré(s) pour le moment.</p>
+    {% endif %}
+  </div>
+</section>
 
 {% endblock content %}

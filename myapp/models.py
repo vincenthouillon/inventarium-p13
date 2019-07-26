@@ -61,6 +61,8 @@ class Equipment(models.Model):
     name = models.CharField("nom de l'équipement", max_length=80)
     brand = models.CharField("marque", max_length=30, null=True, blank=True)
     model = models.CharField("modèle", max_length=40, null=True, blank=True)
+    price = models.DecimalField("prix", max_digits=6, decimal_places=2,
+        null=True, blank=True)
     date_purchase = models.DateField(
         "date d'achat", blank=True, default=datetime.now)
     lenght_warranty = models.IntegerField(

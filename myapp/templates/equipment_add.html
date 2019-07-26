@@ -9,7 +9,7 @@
             {% csrf_token %}
             {{ form | crispy }}
 
-            <a href="{% url 'room' residence.id %}" class="btn btn-secondary btn-sm">Annuler</a>
+            <a href="{% url 'room' room_id.id %}" class="btn btn-secondary btn-sm">Annuler</a>
             <button type="submit" class="btn btn-primo btn-sm">Ajouter</button>
         </form>
 

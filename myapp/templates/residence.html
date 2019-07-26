@@ -1,29 +1,60 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container">
-    <h1>Pièce(s) de la résidence : {{ residence }}</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Provident deserunt nostrum voluptatibus assumenda,
-            itaque a hic quasi molestiae eaque voluptate excepturi rerum,
-            omnis perspiciatis quos tempore dolores, possimus accusamus nam.</p>
-       
-            <a href="{% url 'residence_update' residence.id %}" class="btn btn-secondary btn-sm">mettre à jour</a>
+<section class="section">
 
-    <hr>
-    {% if rooms %}
-        {% for room in rooms %}
-            <a href="{% url 'room' room.0 %}"
-            class="btn btn-outline-primary btn-sm">
-            {{ room.1 }} <span class="badge badge-primary">{{ room.2 }}</span></a>
-        {% endfor %}
-    {% else %}
-        <p class="text-danger">Vous n'avez pas de pièce(s) enregistrée(s) pour le moment.</p>
-    {% endif %}
-        <a href="{% url 'room_add' residence.id %}" class="btn btn-primary btn-sm">ajouter</a>
+  <div class="container">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ residence.name }}</li>
+          </ol>
+        </nav>
+    <h1 class="section-title">Pièce(s) de la résidence : {{ residence|capfirst }}</h1>
 
-
-</div>
+      {% if rooms %}
+      <div class="card-columns card-deck">
+          <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">Ajouter une pièce</h5>
+              <p class="card-tex text-center">
+                <a href="{% url 'room_add' residence.id %}" class="stretched-link" style="font-size: 120px"><i
+                    class="fas fa-plus-circle"></i>
+                </a></p>
+            </div>
+          </div>
+      {% for room in rooms %}
+      <div class="card" style="max-width: 20rem;">
+          <a href="{% url 'room' room.id %}">
+            <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ room.name|capfirst }}</h5>
+          </a>
+          <div class="card-text text-right">
+            <a href="{% url 'room_update' room.id %}" class="btn btn-secondary btn-sm">Modifier</a>
+          </div>
+        </div>
+      {% endfor %}
+      
+      {% else %}
+      <p class="text-danger">Vous n'avez pas de pièce(s) enregistrée(s) pour le moment.</p>
+      <div class="card-columns card-deck">
+          <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">Ajouter une pièce</h5>
+              <p class="card-tex text-center">
+                <a href="{% url 'room_add' residence.id %}" class="stretched-link" style="font-size: 120px"><i
+                    class="fas fa-plus-circle"></i>
+                </a></p>
+            </div>
+          </div>
+      {% endif %}
+      
+      
+      
+    </div>
+  </section>
 
 {% endblock content %}

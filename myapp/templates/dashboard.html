@@ -1,18 +1,59 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
 {% block head_title %}Mon tableau de bord{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1 class="section-title">Mon tableau de bord</h1>
-        {% if residences %}
-        {% for residence in residences %}
-            <a href="{% url 'residence' residence.0 %}" 
-            class="btn btn-outline-primary btn-sm mr-2">{{ residence.1 }}
-            <span class="badge badge-primary">{{ residence.2 }}</span></a>
-        {% endfor %}
-            <a href="{% url 'residence_add' %}"><i class="fas fa-plus-circle"></i></a>
-        {% else %}
-            <p>Oups! Vous n'avez aucune résidence d'enregistrée !</p>
-            <a href="{% url 'residence_add' %}" class="btn btn-primo">Ajouter une résidence</a>
-        {% endif %}
+
+<section class="section">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Acceuil</li>
+      </ol>
+    </nav>
+    <h1 class="section-title">Accueil</h1>
+    {% if residences %}
+    <div class="card-columns card-deck">
+      <div class="card" style="max-width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">Ajouter une résidence</h5>
+          <p class="card-tex text-center">
+            <a href="{% url 'residence_add' %}" class="stretched-link" style="font-size: 120px"><i
+                class="fas fa-plus-circle"></i>
+            </a></p>
+        </div>
+      </div>
+
+      {% for residence in residences %}
+      <div class="card" style="max-width: 20rem;">
+        <a href="{% url 'residence' residence.id %}">
+          <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ residence.name|capfirst }}</h5>
+            <p class="card-text">{{ residence.adress|truncatechars:50 }}</p>
+            <p class="card-text">{{ residence.zip_code }} {{ residence.city }}</p>
+        </a>
+        <div class="card-text text-right">
+          <a href="{% url 'residence_update' residence.id %}" class="btn btn-secondary btn-sm">Modifier</a>
+        </div>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+
+  {% else %}
+  <p>Oups! Vous n'avez aucune résidence d'enregistrée !</p>
+  <div class="card-columns card-deck">
+    <div class="card" style="max-width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title">Ajouter une résidence</h5>
+        <p class="card-tex text-center">
+          <a href="{% url 'residence_add' %}" class="stretched-link" style="font-size: 120px"><i
+              class="fas fa-plus-circle"></i>
+          </a></p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
 {% endblock content %}
