@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from .models import Equipment, Room, Residence
 
-# User registration form
+
 class UserRegisterForm(UserCreationForm):
     """Form used to register a user."""
     email = forms.EmailField(
@@ -43,4 +43,3 @@ class ResidenceForm(forms.ModelForm):
     class Meta:
         model = Residence
         exclude = ['user']
-

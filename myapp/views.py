@@ -2,16 +2,14 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
-from django.core.files.storage import FileSystemStorage
+# from django.core.files.storage import FileSystemStorage
 from django.http import Http404
-from django.shortcuts import (HttpResponseRedirect, get_object_or_404, redirect,
-                              render)
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from .forms import (EquipmentForm, ResidenceForm, RoomForm, UserRegisterForm,
                     UserUpdateForm)
-from .models import Category, Equipment, Residence, Room
+from .models import Equipment, Residence, Room
 
 
 # region: Homepage and registration
@@ -122,11 +120,6 @@ def residence(request, residence_id):
         Residence, id=residence_id, user=request.user)
     rooms = Room.objects.filter(residence=get_residence)
 
-    # rooms_list = list()
-    # for room in Room.objects.filter(residence=get_residence):
-    #     rooms_list.append((room.id, room, Equipment.objects.filter(
-    #         room=room).count(), residence))
-
     return render(request, 'residence.html', {
         'rooms': rooms,
         'residence': get_residence,
@@ -154,13 +147,14 @@ def equipment(request, equipment_id):
     """Display the equipments in room."""
     get_equipment = get_object_or_404(Equipment, id=equipment_id)
 
-    if get_equipment.room.residence in Residence.objects.filter(user=request.user):
-        equipments = Equipment.objects.filter(room=get_equipment.room)
+    if get_equipment.room.residence in Residence.objects.filter(
+            user=request.user):
+        equipments = get_object_or_404(Equipment, id=get_equipment.id)
     else:
         raise Http404()
 
     return render(request, 'equipment.html', {
-        'equipment': get_equipment,
+        'equipment': equipments,
     })
 # endregion
 
@@ -238,7 +232,8 @@ def room_update(request, room_id):
                 form.save()
                 messages.success(
                     request, f'Votre pièce a bien été mise à jour')
-                return redirect('residence', residence_id=get_room.residence.id)
+                return redirect('residence',
+                                residence_id=get_room.residence.id)
         else:
             u_form = RoomForm(instance=get_room)
 
@@ -282,7 +277,8 @@ def equipment_update(request, equipment_id):
     get_equipment = get_object_or_404(Equipment, id=equipment_id)
 
     # If the residence belongs to the residences of the user
-    if get_equipment.room.residence in Residence.objects.filter(user=request.user):
+    if get_equipment.room.residence in Residence.objects.filter(
+            user=request.user):
         if request.method == 'POST':
             u_form = EquipmentForm(request.POST, instance=get_equipment)
             if u_form.is_valid():
@@ -301,3 +297,42 @@ def equipment_update(request, equipment_id):
     else:
         raise Http404()
 # endregion
+
+
+@login_required
+def search(request):
+    query = request.GET.get('query')
+
+    """ si les équipements appartiene à l'utilisateur """
+    residences = Residence.objects.filter(user=request.user)
+    
+    equipments = Equipment.objects.all()
+    
+    queryset = Equipment.objects.none()
+    for e in equipments:
+        for r in residences:
+            if e.room in Room.objects.filter(residence=r):
+                queryset |= Equipment.objects.filter(name=e)
+
+    if not query:
+        equipments = queryset
+        title = "n/a"
+    else:
+        equipments = queryset.filter(name__icontains=query)
+        title = query
+
+    # if not equipments.exists():
+    #     equipments = Equipment.objects.filter(name__icontains=query)
+
+    context = {
+        'equipments': equipments,
+        'title': title
+    }
+
+    return render(request, 'search.html', context)
+
+
+def all_equipments(request):
+    equipments = Equipment.objects.all()
+
+    return render(request, 'all_equipments.html', {'equipments': equipments})

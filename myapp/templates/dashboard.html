@@ -12,8 +12,8 @@
     </nav>
     <h1 class="section-title">Mes résidences</h1>
     {% if residences %}
-    <div class="card-columns card-deck">
-      <div class="card" style="max-width: 18rem;">
+    <div class="card-deck">
+      <div class="card" style="max-width: 22rem;">
         <div class="card-body">
           <h5 class="card-title">Ajouter une résidence</h5>
           <p class="card-tex text-center">
@@ -23,11 +23,11 @@
         </div>
       </div>
       {% for residence in residences %}
-      <div class="card" style="max-width: 18rem;">
+      <div class="card" style="max-width: 22rem;">
         <a href="{% url 'residence' residence.id %}">
           <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">{{ residence.name|capfirst }}</h5>
+            <h5 class="card-title text-dark">{{ residence.name|capfirst }}</h5>
             <p class="card-text">{{ residence.adress|truncatechars:50 }}</p>
             <p class="card-text">{{ residence.zip_code }} {{ residence.city }}</p>
         </a>
@@ -40,8 +40,7 @@
     {% endfor %}
   </div>
   {% else %}
-  <div class="card-columns card-deck">
-    <div class="card" style="max-width: 18rem;">
+    <div class="card" style="max-width: 22rem;">
       <div class="card-body">
         <h5 class="card-title">Ajouter une résidence</h5>
         <p class="card-tex text-center">
@@ -51,7 +50,6 @@
           <p>Oups! Vous n'avez aucune résidence d'enregistrée !</p>
       </div>
     </div>
-  </div>
   {% endif %}
   </div>
 </section>

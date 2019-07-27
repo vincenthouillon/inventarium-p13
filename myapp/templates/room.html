@@ -17,7 +17,7 @@
     <h1 class="section-title">Liste des équipements de : {{ room|capfirst }}</h1>
     {% if equipments %}
     <div class="card-deck">
-      <div class="card" style="max-width: 18rem;">
+      <div class="card" style="max-width: 22rem;">
         <div class="card-body">
           <h5 class="card-title">Ajouter un équipement</h5>
           <p class="card-tex text-center">
@@ -27,11 +27,11 @@
         </div>
       </div>
       {% for equipment in equipments %}
-      <div class="card" style="max-width: 18rem;">
+      <div class="card" style="max-width: 22rem;">
         <a href="{% url 'equipment' equipment.id %}">
           <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">{{ equipment.name|capfirst }}</h5>
+            <h5 class="card-title text-dark">{{ equipment.name|capfirst }}</h5>
             <p class="card-text">{{ equipment.note|truncatechars:50 }}</p>
         </a>
         <div class="card-text text-right mt-2">
@@ -43,7 +43,7 @@
     {% endfor %}
   </div>
   {% else %}
-  <div class="card" style="max-width: 18rem;">
+  <div class="card" style="max-width: 22rem;">
     <div class="card-body">
       <h5 class="card-title">Ajouter un équipement</h5>
       <p class="card-tex text-center mt-2">

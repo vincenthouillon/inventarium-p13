@@ -15,7 +15,7 @@
     <h1 class="section-title">Pièce(s) de la résidence : {{ residence|capfirst }}</h1>
     {% if rooms %}
     <div class="card-deck">
-      <div class="card" style="max-width: 22rem;">
+      <div class="card" style="max-width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Ajouter une pièce</h5>
           <p class="card-tex text-center">
@@ -25,11 +25,11 @@
         </div>
       </div>
       {% for room in rooms %}
-      <div class="card" style="max-width: 22rem;">
+      <div class="card" style="max-width: 18rem;">
         <a href="{% url 'room' room.id %}">
           <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title text-dark">{{ room.name|capfirst }}</h5>
+            <h5 class="card-title">{{ room.name|capfirst }}</h5>
         </a>
         <div class="card-text text-right mt-2">
           <a href="{% url 'room_update' room.id %}" class="btn btn-secondary btn-sm">Modifier</a>
@@ -40,6 +40,7 @@
     {% endfor %}
   </div>
   {% else %}
+  <div class="card">
     <div class="card" style="max-width: 20rem;">
       <div class="card-body">
         <h5 class="card-title">Ajouter une pièce</h5>
@@ -50,6 +51,7 @@
           <p class="text-danger">Vous n'avez pas de pièce(s) enregistrée(s) pour le moment.</p>
       </div>
     </div>
+  </div>
   {% endif %}
   </div>
 </section>

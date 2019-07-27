@@ -1,7 +1,6 @@
 # https://docs.djangoproject.com/fr/2.2/topics/db/models/
 from datetime import datetime
 
-from django.contrib import admin
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
@@ -13,9 +12,13 @@ class Residence(models.Model):
         "nom de la résidence", max_length=45)
     adress = models.CharField("adresse", max_length=80, null=True, blank=True)
     zip_regex = RegexValidator(
-        regex=r'^\d{5}$', message="Le code postal doit être au format 99999, exemple : '75000'.")
+        regex=r'^\d{5}$',
+        message="Le code postal doit être au format 99999, exemple : '75000'.")
     zip_code = models.CharField("code postal", validators=[
-                                zip_regex], max_length=5, null=True, blank=True)
+                                zip_regex],
+                                max_length=5,
+                                null=True,
+                                blank=True)
     city = models.CharField("ville", max_length=45, null=True, blank=True)
 
     user = models.ForeignKey(
@@ -62,7 +65,7 @@ class Equipment(models.Model):
     brand = models.CharField("marque", max_length=30, null=True, blank=True)
     model = models.CharField("modèle", max_length=40, null=True, blank=True)
     price = models.DecimalField("prix", max_digits=6, decimal_places=2,
-        null=True, blank=True)
+                                null=True, blank=True)
     date_purchase = models.DateField(
         "date d'achat", blank=True, default=datetime.now)
     lenght_warranty = models.IntegerField(
@@ -70,11 +73,14 @@ class Equipment(models.Model):
         default="48", blank=True)
     note = models.TextField("remarque", null=True, blank=True)
     picture = models.ImageField(
-        upload_to="equipments/picture", null=True, blank=True, verbose_name="photo")
+        upload_to="equipments/picture", null=True, blank=True,
+        verbose_name="photo")
     invoice = models.FileField(
-        upload_to="equipements/invoice", null=True, blank=True, verbose_name="facture")
+        upload_to="equipements/invoice", null=True, blank=True,
+        verbose_name="facture")
     manual = models.FileField(upload_to="equipements/manual",
-                              null=True, blank=True, verbose_name="mode d'emploi")
+                              null=True, blank=True,
+                              verbose_name="mode d'emploi")
     is_active = models.BooleanField("Equipement actif", default=1)
 
     room = models.ForeignKey(

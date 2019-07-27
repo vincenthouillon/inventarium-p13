@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block head_title %}Tous mes équipements{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Recherche : {{ title }}</li>
+            </ol>
+        </nav>
+
+
+        <h1 class="section-title">Résultat de la recherche {{ title }}</h1>
+        {% if equipments %}
+        <div class="card-deck">
+        {% for equipment in equipments %}
+            <div class="card" style="max-width: 22rem;">
+                    <a href="{% url 'equipment' equipment.id %}">
+                      <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title text-dark">{{ equipment.name|capfirst }}</h5>
+                    </a>
+                    <div class="card-text text-right mt-2">
+                      <a href="{% url 'equipment' equipment.id %}" class="btn btn-primo btn-sm">voir</a>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Pas de résultat pour {{ title }}</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}
