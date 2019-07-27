@@ -1,10 +1,13 @@
+{% load static %}
 <section id="nav-bar">
     <nav class="navbar navbar-expand-lg navbar-light">
         {% if user.is_authenticated %}
-        <a class="navbar-brand" href="{% url 'dashboard' %}">Inventarium</a>
-        <form class="form-inline my-2 my-lg-0"  action="{% url 'search' %}">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="searchForm">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <a class="navbar-brand" href="{% url 'dashboard' %}"><img class="logo" src="{% static 'img/favicon.png' %}"
+                alt="logo"> Inventarium</a>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un équipement" aria-label="Search"
+                name="query" id="searchForm">
+            <button class="btn btn-outline-primo my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
         </form>
         {% else %}
         <a class="navbar-brand" href="{% url 'homepage' %}">Inventarium</a>
@@ -26,26 +29,27 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link btn btn-outline-primo dropdown-toggle font-weight-bold" 
-                    id="navbarDropdown"
-                    data-toggle="dropdown" 
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    <a class="btn btn-outline-primo dropdown-toggle" id="navbarDropdown"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                     href="#">{{ user.username }}</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'profile' %}">Mon compte</a>
-                            <a class="dropdown-item" href="{% url 'dashboard' %}">Mon tableau de bord</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'signout' %}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
-                            </div>
-                </li>
-                {% else %}
-                <li class="nav-item mr-4">
-                    <a class="nav-link btn btn-outline-primo" href="{% url 'signin' %}"><i class="fas fa-sign-in-alt"></i> S'identifier</a>
+                        <a class="dropdown-item" href="{% url 'profile' %}">Mon compte</a>
+                        <a class="dropdown-item" href="{% url 'dashboard' %}">Mon tableau de bord</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'signout' %}"><i class="fas fa-sign-out-alt"></i> Se
+                            déconnecter</a>
+                        </div>
+                        {% else %}
+                        <!-- Button trigger modal -->
+                        <li class="nav-item text-right ml-4">
+                            <button type="button" class="btn btn-outline-primo" data-toggle="modal"
+                            data-target="#loginModal">Se connecter
+                        </button>
+                    </li>
                 </li>
                 {% endif %}
             </ul>
         </div>
     </nav>
-    <p class="state"> version alpha</p>
+    <p class="state"> version beta</p>
 </section>

@@ -31,6 +31,10 @@
     color: $primary-color !important;
 }
 
+#navbarDropdown {
+    margin-left: 20px;
+}
+
 .navbar-toggler {
     outline: none;
 }
@@ -39,4 +43,12 @@
     #nav-bar {
         padding-right: 0;
     }
+    .nav-item {
+        margin: 10px;
+    }
+}
+
+.logo{
+    width: 14px;
+    margin: -3px -3px 0 0;
 }

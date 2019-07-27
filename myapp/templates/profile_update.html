@@ -5,13 +5,12 @@
 <div class="section">
     <div class="container">
         <h1 class="section-title">Mon compte</h1>
-        <h2 class="section-subtitle">Information sur votre compte.</h2>
         <form method="POST" class="col-lg-5 col-sm-12">
             {% csrf_token %}
             {{ u_form | crispy}}
             <div class="sign-in">
-                <a href="{% url 'profile' %}" class="btn btn-secondary btn-sm">Annuler</a>
-                <button class="btn btn-primo btn-sm" type="submit" onclick="return confirm('Etes-vous sûr ?')">
+                <a href="{% url 'profile' %}" class="btn btn-secondary">Annuler</a>
+                <button class="btn btn-primo" type="submit" onclick="return confirm('Etes-vous sûr ?')">
                     <i class="fas fa-save"></i> Mettre à jour</button>
                 </div>
         </form>

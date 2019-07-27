@@ -13,14 +13,21 @@ class UserRegisterForm(UserCreationForm):
         max_length=255,
         required=True)
 
+    terms = forms.BooleanField(
+        error_messages={'required': 'Vous devez accepter les conditions d\'utilisation'},
+        label="J'accepte les <a href='#'>conditions d'utilisation.</a>"
+)
+
     class Meta:
         model = User
         fields = ('username', 'last_name', 'first_name',
-                  'email', 'password1', 'password2')
+                  'email', 'password1', 'password2', 'terms')
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+    email = forms.EmailField(
+        label="Adresse électronique",
+        max_length=255)
 
     class Meta:
         model = User

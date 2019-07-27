@@ -5,16 +5,43 @@
 
 <section class="section">
     <div class="container">
-        <h1 class="section-title">Inscription</h1>
-        <h2 class="section-subtitle">Créer votre compte.</h2>
-        <form method="POST" class="col-lg-5 col-sm-12">
+        <h1 class="section-title">Créer un nouveau compte</h1>
+        <form method="POST" class="col-lg-10 col-sm-12">
             {% csrf_token %}
-            {{ form | crispy }}
+            <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                            {{ form.username|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                            {{ form.email|as_crispy_field }}
+                    </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                        {{ form.last_name|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                        {{ form.first_name|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                        {{ form.password1|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                        {{ form.password2|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                        {{ form.terms|as_crispy_field }}
+                </div>
+            </div>
             <div class="sign-in">
                 <a href="{% url 'signin' %}">
                     Se connecter à un compte existant</a>
-                <button class="btn btn-primo btn-sm" type="submit">
-                    <i class="fas fa-save"></i> S'enregister</button>
+                <button class="btn btn-primo" type="submit">
+                    Créer un nouveau compte</button>
             </div>
         </form>
     </div>

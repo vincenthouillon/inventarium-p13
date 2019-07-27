@@ -6,17 +6,16 @@
 <div class="section">
     <div class="container">
             <h1 class="section-title">Connexion</h1>
-            <h2 class="section-subtitle">Se connecter à votre compte.</h2>
         <form id="login_form" method="POST" class="col-lg-5 col-sm-12">
             {{ form | crispy }}
             {% csrf_token %}
             <div class="sign-in">
                     <a href="{% url 'register' %}">
-                        Pas encore enregistré(e) ? </a>
-                    <button class="btn btn-primo btn-sm" type="submit"><i class="fas fa-sign-in-alt"></i> S'identifier</button>
+                            Créer un nouveau compte.</a>
+                    <button class="btn btn-primo" type="submit"><i class="fas fa-lock-open"></i> Se connecter</button>
                 </div>
             <small class='text-muted ml-2'>
-                <a href="{% url 'homepage' %}">Mot de passe oublié ?</a>
+                <a href="{% url 'homepage' %}">Mot de passe oublié !</a>
             </small>
         </form>
     </div>

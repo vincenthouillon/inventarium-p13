@@ -15,8 +15,31 @@ from .models import Equipment, Residence, Room
 # region: Homepage and registration
 def homepage(request):
     """Display homepage."""
+    """User login page."""
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(
+                    request, "Vous êtes connecté {}".format(username))
+                return redirect('dashboard')
+            else:
+                messages.error(
+                    request, "Nom d'utilisateur ou mot de passe invalide.",
+                    "danger")
+        else:
+            messages.error(
+                request, "Nom d'utilisateur ou mot de passe invalide.",
+                "danger")
+
+    form = AuthenticationForm()
+
     template_name = 'index.html'
-    return render(request, template_name)
+    return render(request, template_name, {'form': form})
 
 
 def about(request):
@@ -302,12 +325,9 @@ def equipment_update(request, equipment_id):
 @login_required
 def search(request):
     query = request.GET.get('query')
-
-    """ si les équipements appartiene à l'utilisateur """
     residences = Residence.objects.filter(user=request.user)
-    
     equipments = Equipment.objects.all()
-    
+
     queryset = Equipment.objects.none()
     for e in equipments:
         for r in residences:
@@ -321,15 +341,10 @@ def search(request):
         equipments = queryset.filter(name__icontains=query)
         title = query
 
-    # if not equipments.exists():
-    #     equipments = Equipment.objects.filter(name__icontains=query)
-
-    context = {
+    return render(request, 'search.html', {
         'equipments': equipments,
         'title': title
-    }
-
-    return render(request, 'search.html', context)
+    })
 
 
 def all_equipments(request):

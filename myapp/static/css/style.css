@@ -26,12 +26,22 @@
 .nav-link:hover {
   color: #ed4d71 !important; }
 
+#navbarDropdown {
+  margin-left: 20px; }
+
 .navbar-toggler {
   outline: none; }
 
 @media only screen and (max-width: 991.98px) {
   #nav-bar {
-    padding-right: 0; } }
+    padding-right: 0; }
+
+  .nav-item {
+    margin: 10px; } }
+.logo {
+  width: 14px;
+  margin: -3px -3px 0 0; }
+
 * {
   margin: 0;
   padding: 0; }
@@ -177,7 +187,7 @@ p {
     text-decoration: none;
     color: #BA1A3E; }
 
-/* -------------- FORMS SIGUP -------------- */
+/* -------------- FORMS SIGNUP -------------- */
 .help-text {
   font-size: 0.7em;
   color: #7f8c8d;
