@@ -14,9 +14,10 @@ class UserRegisterForm(UserCreationForm):
         required=True)
 
     terms = forms.BooleanField(
-        error_messages={'required': 'Vous devez accepter les conditions d\'utilisation'},
-        label="J'accepte les <a href='#'>conditions d'utilisation.</a>"
-)
+        error_messages={
+            'required': 'Vous devez accepter les conditions d\'utilisation'},
+        label="J'accepte les <a href='./terms/' target='_blank'> conditions d\'utilisation.</a>"
+    )
 
     class Meta:
         model = User

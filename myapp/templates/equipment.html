@@ -16,17 +16,27 @@
         <li class="breadcrumb-item active" aria-current="page">{{ equipment.name|capfirst }}</li>
       </ol>
     </nav>
-    <h1 class="section-title">Equipements situé dans : {{ equipment.room|capfirst }}</h1>
+    <h1 class="section-title">{{ equipment.name|capfirst }}</h1>
+
     <div class="row">
       <div class="col-lg-6 col-sm-12">
-        <a href="{% static 'img/houseCrossSection.jpg' %}">
-          <img src="{% static 'img/houseCrossSection.jpg' %}" class="img-thumbnail" alt="photo de l'équipement">
+        {% if equipment.picture %}
+        <a href="{{ equipment.picture.url }}" target="_blank">
+          <img src="{{ equipment.picture.url }}" class="img-thumbnail mb-2" alt="photo de l'équipement">
         </a>
+        {% else %}
+        <a href="{% static 'img/houseCrossSection.jpg' %}">
+          <img src="{% static 'img/houseCrossSection.jpg' %}" class="img-thumbnail mb-2" alt="photo de l'équipement">
+        </a>
+        {% endif %}
       </div>
       <div class="col-lg-6 col-sm-12">
-        <h2 class="section-subtitle">{{ equipment.name|capfirst }}</h2>
-        <p>{{ equipment.note }}</p>
-        <table class="table-sm mb-2">
+        <div class="progress" style="height: 2px">
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+        <p class="mt-2">{{ equipment.note }}</p>
+        <table class="table-sm mx-2">
           <tr>
             <td class="small font-weight-bold">Marque :</td>
             <td>{{ equipment.brand }}</td>
@@ -48,20 +58,37 @@
             <td class="text-success">{{ equipment.lenght_warranty }} mois</td>
           </tr>
           <tr>
-            <td class="small font-weight-bold">Category :</td>
+            <td class="small font-weight-bold">Categorie :</td>
             <td>{{ equipment.category }}</td>
           </tr>
         </table>
-        <div class="progress">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
+        <div class="mt-2">
+          {% if equipment.invoice %}
+          <a class="btn btn-outline-primo btn-sm" href="{{ equipment.invoice.url }}" target="_blank">
+              <i class="fas fa-file-pdf"></i> Facture
+          </a>
+          {% else %}
+          <span class="btn btn-outline-light bg-light border btn-sm"
+          title="Vous n'avez pas de facture enregistré">
+              <i class="fas fa-file-pdf"></i> Facture
+        </span>
+          {% endif %}
+          {% if manual %}
+          <a class="btn btn-outline-primo btn-sm" href="{{ equipment.manual.url }}" target="_blank">
+              <i class="fas fa-file-pdf"></i> Mode d'emploi
+          </a>
+          {% else %}
+          <span class="btn btn-outline-light bg-light border btn-sm" 
+            title="Vous n'avez pas de mode d'emploi enregistré">
+              <i class="fas fa-file-pdf"></i> Mode d'emploi
+          </span>
+          {% endif %}
         </div>
-        <br>
-        <p class="btn btn-primo btn-sm"><i class="fas fa-file-pdf"></i> Facture</p>
-        <p class="btn btn-primo btn-sm"><i class="fas fa-file-pdf"></i> Mode d'emploi</p>
         <hr>
-        <a href="{% url 'equipment_update' equipment.id %}" class="btn btn-secondary btn-sm">Modifier</a>
-        <a href="#" class="btn btn-danger btn-sm">Supprimer</a>
+        <div class="text-right">
+          <a href="{% url 'equipment_update' equipment.id %}" class="btn btn-secondary">Modifier</a>
+          <a href="#" class="btn btn-danger">Supprimer</a>
+        </div>
       </div>
     </div>
   </div>

@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-# from django.core.files.storage import FileSystemStorage
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -70,6 +69,12 @@ def register(request):
     return render(request, template_name, context)
 
 
+def terms(request):
+    """Display about page."""
+    template_name = 'terms.html'
+    return render(request, template_name)
+
+
 def signin(request):
     """User login page."""
     if request.method == 'POST':
@@ -131,7 +136,8 @@ def profile_update(request):
 @login_required
 def dashboard(request):
     """Display the user account page."""
-    qs_residences = Residence.objects.filter(user=request.user)
+    qs_residences = Residence.objects.filter(
+        user=request.user).order_by('name')
 
     return render(request, 'dashboard.html', {'residences': qs_residences, })
 
@@ -141,7 +147,7 @@ def residence(request, residence_id):
     """Display the rooms."""
     get_residence = get_object_or_404(
         Residence, id=residence_id, user=request.user)
-    rooms = Room.objects.filter(residence=get_residence)
+    rooms = Room.objects.filter(residence=get_residence).order_by('name')
 
     return render(request, 'residence.html', {
         'rooms': rooms,
@@ -155,7 +161,7 @@ def room(request, room_id):
     get_room = get_object_or_404(Room, id=room_id)
 
     if get_room.residence in Residence.objects.filter(user=request.user):
-        equipments = Equipment.objects.filter(room=get_room)
+        equipments = Equipment.objects.filter(room=get_room).order_by('name')
     else:
         raise Http404()
 
@@ -225,7 +231,7 @@ def room_add(request, residence_id):
         Residence, id=residence_id, user=request.user)
 
     if request.method == 'POST':
-        u_form = RoomForm(request.POST)
+        u_form = RoomForm(request.POST, request.FILES)
         if u_form.is_valid():
             form = u_form.save(commit=False)
             form.residence = get_residence
@@ -248,7 +254,7 @@ def room_update(request, room_id):
     # If the residence belongs to the residences of the user
     if get_room.residence in Residence.objects.filter(user=request.user):
         if request.method == 'POST':
-            u_form = RoomForm(request.POST, instance=get_room)
+            u_form = RoomForm(request.POST, request.FILES, instance=get_room)
             if u_form.is_valid():
                 form = u_form.save(commit=False)
                 form.residence = get_room.residence
@@ -260,7 +266,7 @@ def room_update(request, room_id):
         else:
             u_form = RoomForm(instance=get_room)
 
-        return render(request, 'room_add.html', {
+        return render(request, 'room_update.html', {
             'form': u_form,
             'residence': get_room.residence
         })
@@ -276,7 +282,7 @@ def equipment_add(request, room_id):
     # If the residence belongs to the residences of the user
     if get_room.residence in Residence.objects.filter(user=request.user):
         if request.method == 'POST':
-            u_form = EquipmentForm(request.POST)
+            u_form = EquipmentForm(request.POST, request.FILES)
             if u_form.is_valid():
                 form = u_form.save(commit=False)
                 form.room = get_room
@@ -303,7 +309,8 @@ def equipment_update(request, equipment_id):
     if get_equipment.room.residence in Residence.objects.filter(
             user=request.user):
         if request.method == 'POST':
-            u_form = EquipmentForm(request.POST, instance=get_equipment)
+            u_form = EquipmentForm(request.POST, request.FILES,
+                                   instance=get_equipment)
             if u_form.is_valid():
                 form = u_form.save(commit=False)
                 form.room = get_equipment.room
@@ -312,13 +319,19 @@ def equipment_update(request, equipment_id):
         else:
             u_form = EquipmentForm(instance=get_equipment)
 
-        return render(request, 'equipment_add.html', {
+        return render(request, 'equipment_update.html', {
             'form': u_form,
-            'residence': get_equipment,
+            'equipment': get_equipment,
         })
 
     else:
         raise Http404()
+
+def equipment_delete(request, pk):
+    if request.method == 'POST':
+        equipment = Equipment.objects.get(pk=pk)
+        equipment.delete()
+    return redirect('dashboard')
 # endregion
 
 
@@ -347,7 +360,7 @@ def search(request):
     })
 
 
-def all_equipments(request):
+def equipments_all(request):
     equipments = Equipment.objects.all()
 
-    return render(request, 'all_equipments.html', {'equipments': equipments})
+    return render(request, 'equipments_all.html', {'equipments': equipments})

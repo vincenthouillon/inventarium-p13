@@ -2,8 +2,9 @@
 from datetime import datetime
 
 from django.contrib.auth.models import User
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, FileExtensionValidator
 from django.db import models
+from PIL import Image
 
 
 class Residence(models.Model):
@@ -47,6 +48,20 @@ class Room(models.Model):
     class Meta:
         verbose_name = "pièce"
 
+    def save(self):
+        super().save()
+
+        img = Image.open(self.picture.path)
+
+        if img.height > 400 or img.width > 400:
+            output_size = (400, 400)
+            img.thumbnail(output_size)
+            img.save(self.picture.path)
+
+    def delete(self, *args, **kwargs):
+        self.picture.delete()
+        super().delete(*args, **kwargs)
+
 
 class Category(models.Model):
     """Category data table."""
@@ -71,16 +86,23 @@ class Equipment(models.Model):
     lenght_warranty = models.IntegerField(
         "durée de garantie", null=True, help_text="Durée exprimée en mois",
         default="48", blank=True)
-    note = models.TextField("remarque", null=True, blank=True)
+    note = models.TextField("note", null=True, blank=True)
     picture = models.ImageField(
         upload_to="equipments/picture", null=True, blank=True,
         verbose_name="photo")
     invoice = models.FileField(
-        upload_to="equipements/invoice", null=True, blank=True,
-        verbose_name="facture")
-    manual = models.FileField(upload_to="equipements/manual",
-                              null=True, blank=True,
-                              verbose_name="mode d'emploi")
+        upload_to="equipments/invoice", null=True, blank=True,
+        verbose_name="facture",
+        help_text="Uniquement fichier PDF.",
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'],
+                                           message="Uniquement fichier PDF.")])
+    manual = models.FileField(
+        upload_to="equipments/manual",
+        null=True, blank=True,
+        verbose_name="mode d'emploi",
+        help_text="Uniquement fichier PDF.",
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'],
+                                           message="Uniquement fichier PDF.")])
     is_active = models.BooleanField("Equipement actif", default=1)
 
     room = models.ForeignKey(
@@ -93,3 +115,19 @@ class Equipment(models.Model):
 
     class Meta:
         verbose_name = 'équipement'
+
+    def save(self):
+        super().save()
+
+        img = Image.open(self.picture.path)
+
+        if img.height > 400 or img.width > 400:
+            output_size = (400, 400)
+            img.thumbnail(output_size)
+            img.save(self.picture.path)
+
+    def delete(self, *args, **kwargs):
+        self.picture.delete()
+        self.invoice.delete()
+        self.manual.delete()
+        super().delete(*args, **kwargs)

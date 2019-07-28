@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage'),
     path('register/', views.register, name='register'),
+    path('register/terms/', views.terms, name='terms'),
     path('signin/', views.signin, name='signin'),
     path('signout/', views.signout, name='signout'),
     path('profile/', views.profile, name='profile'),
@@ -32,21 +33,22 @@ urlpatterns = [
 
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/residence_add', views.residence_add, name='residence_add'),
-    path('residence/<residence_id>', views.residence, name='residence'),
-    path('residence/<residence_id>/update',
+    path('residence/<int:residence_id>', views.residence, name='residence'),
+    path('residence/<int:residence_id>/update',
          views.residence_update, name='residence_update'),
 
-    path('room/<room_id>/', views.room, name='room'),
-    path('room/<residence_id>/add', views.room_add, name='room_add'),
-    path('room/<room_id>/update', views.room_update, name='room_update'),
-    # TODO [23 Juillet 2019]: add room_update template
+    path('room/<int:room_id>/', views.room, name='room'),
+    path('room/<int:residence_id>/add', views.room_add, name='room_add'),
+    path('room/<int:room_id>/update', views.room_update, name='room_update'),
 
-    path('equipment/<equipment_id>/', views.equipment, name='equipment'),
-    path('equipment/add/<room_id>/', views.equipment_add, name='equipment_add'),
-    path('equipment/update/<equipment_id>/',
+    path('equipment/<int:equipment_id>/', views.equipment, name='equipment'),
+    path('equipment/add/<int:room_id>/', views.equipment_add,
+         name='equipment_add'),
+    path('equipment/update/<int:equipment_id>/',
          views.equipment_update, name='equipment_update'),
-    # TODO [23 Juillet 2019]: add equipment_update template
-    
+    path('equipment/delete/<int:pk>/',
+         views.equipment_delete, name='equipment_delete'),
+
     path('search/', views.search, name='search'),
 ]
 

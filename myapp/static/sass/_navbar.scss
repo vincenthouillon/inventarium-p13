@@ -7,7 +7,7 @@
 
 .navbar {
     background-color: rgba(255, 255, 255, 0.95);
-    // box-shadow: 0 0 5px rgba(34, 38, 42, 0.2);
+    box-shadow: 0 0 5px rgba(34, 38, 42, 0.2);
 }
 
 .navbar-brand {
@@ -16,6 +16,11 @@
     text-transform: uppercase;
     color: $title-color !important;
     padding: 0 6px;
+}
+
+.btn-search {
+    border-radius: 0 .25rem .25rem 0;
+    margin-left: -1px;
 }
 
 .nav-link {
@@ -39,6 +44,10 @@
     outline: none;
 }
 
+.dropdown {
+    text-align: right;
+}
+
 @media only screen and (max-width:991.98px) {
     #nav-bar {
         padding-right: 0;
@@ -46,9 +55,12 @@
     .nav-item {
         margin: 10px;
     }
+    .navbar-toggler {
+        outline: none;
+    }
 }
 
 .logo{
     width: 14px;
-    margin: -3px -3px 0 0;
+    margin: -5px -3px 0 0;
 }

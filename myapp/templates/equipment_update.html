@@ -4,9 +4,16 @@
 {% block content %}
 <div class="section">
     <div class="container">
-        <h1 class="section-title">Nouvel équipement</h1>
+        <h1 class="section-title">Mise à jour de l'équipement</h1>
         <form method="post" enctype="multipart/form-data" class="col-lg-12 col-sm-12">
             {% csrf_token %}
+            {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p> {{ error }} </p>
+                {% endfor %}
+            {% endfor %}
+            {% endif %}
             <div class="form-row">
                 <div class="form-group col-md-6 mb-0">
                     {{ form.name|as_crispy_field }}
@@ -35,9 +42,8 @@
                     {{ form.manual|as_crispy_field }}
                 </div>
             </div>
-
-            <a href="{% url 'room' room_id.id %}" class="btn btn-secondary">Annuler</a>
-            <button type="submit" class="btn btn-primo">Ajouter</button>
+            <a href="{% url 'room' equipment.room.id %}" class="btn btn-secondary">Annuler</a>
+            <button type="submit" class="btn btn-primo">Mettre à jour</button>
         </form>
 
         {% endblock content %}
