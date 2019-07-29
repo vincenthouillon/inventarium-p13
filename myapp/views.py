@@ -322,6 +322,10 @@ def equipment_update(request, equipment_id):
             if u_form.is_valid():
                 form = u_form.save(commit=False)
                 form.room = get_equipment.room
+                messages.info(
+                    request,
+                    'L\'équipement "{}" a bien été mis à jour.'.format(
+                        form.name))
                 form.save()
                 return redirect('room', room_id=get_equipment.room.id)
         else:
@@ -354,7 +358,7 @@ def search(request):
     for e in equipments:
         for r in residences:
             if e.room in Room.objects.filter(residence=r):
-                queryset |= Equipment.objects.filter(name=e)
+                queryset |= Equipment.objects.filter(room=e.room)
 
     if not query:
         equipments = queryset
@@ -370,6 +374,7 @@ def search(request):
 
 
 def equipments_all(request):
+    # equipments = Equipment.objects.all()
     equipments = Equipment.objects.all()
 
     return render(request, 'equipments_all.html', {'equipments': equipments})

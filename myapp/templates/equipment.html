@@ -18,18 +18,18 @@
     </nav>
     <h1 class="section-title">{{ equipment.name|capfirst }}</h1>
     <div class="row">
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-4 col-sm-12">
         {% if equipment.picture %}
         <a href="{{ equipment.picture.url }}" target="_blank">
           <img src="{{ equipment.picture.url }}" class="img-thumbnail mb-2" alt="photo de l'équipement">
         </a>
         {% else %}
-        <a href="{% static 'img/houseCrossSection.jpg' %}">
-          <img src="{% static 'img/houseCrossSection.jpg' %}" class="img-thumbnail mb-2" alt="photo de l'équipement">
+        <a href="#" title="Pas d'image">
+          <img src="{% static 'img/noPicture.png' %}" class="img-thumbnail mb-2" alt="photo de l'équipement">
         </a>
         {% endif %}
       </div>
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-8 col-sm-12">
         <div class="progress" style="height: 2px">
           <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
             aria-valuemax="100"></div>

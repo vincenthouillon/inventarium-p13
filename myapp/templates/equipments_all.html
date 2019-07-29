@@ -4,34 +4,46 @@
 
 {% block content %}
 <section class="section">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Recherche : {{ title }}</li>
-            </ol>
-        </nav>
-
-
-        <h1 class="section-title">Résultat de la recherche {{ title }}</h1>
-        {% if equipments %}
-        <div class="card-deck">
-        {% for equipment in equipments %}
-            <div class="card" style="max-width: 22rem;">
-                    <a href="{% url 'equipment' equipment.id %}">
-                      <img src="{% static 'img/HouseCrossSection.jpg' %}" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title text-dark">{{ equipment.name|capfirst }}</h5>
-                    </a>
-                    <div class="card-text text-right mt-2">
-                      <a href="{% url 'equipment' equipment.id %}" class="btn btn-primo btn-sm">voir</a>
-                    </div>
-                  </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Pas de résultat pour {{ title }}</p>
-        {% endif %}
-    </div>
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Recherche : {{ title }}</li>
+      </ol>
+    </nav>
+    <h1 class="section-title">Résultat de la recherche {{ title }}</h1>
+    {% if equipments %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Equipement</th>
+          <th>Résidence</th>
+          <th>Pièce</th>
+        </tr>
+      </thead>
+      {% for equipment in equipments %}
+      <tbody>
+        <tr class="clickable-row" data-href="{% url 'equipment' equipment.id %}" style="cursor:pointer;height:70px;">
+          {% if equipment.picture %}
+          <td>
+            <img src="{{ equipment.picture.url }}" alt="" style="width:60px">
+          </td>
+          {% else %}
+          <td>
+              <img src="{% static 'img/noPicture.png' %}" alt="pas d'image" style="width:65px">
+          </td>
+          {% endif %}
+          <td class="align-middle">{{ equipment.name|capfirst }}</td>
+          <td class="align-middle">{{ equipment.room.residence|capfirst }}</td>
+          <td class="align-middle">{{ equipment.room|capfirst }}</td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>Pas de résultat pour {{ title }}</p>
+    {% endif %}
+  </div>
 </section>
 {% endblock content %}

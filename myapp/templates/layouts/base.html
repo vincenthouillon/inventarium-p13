@@ -19,14 +19,18 @@
     <div class="wrapper">
 
         {% include 'layouts/navbar.html' %}
-        {% block content %}
-        {% if form.messages %}
-        {% for field in form %}
-            {% for msg in field.messages %}
-            <div class="alert alert-success">{{ msg }}</div>
-            {% endfor %}
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissable" data-auto-dismiss>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+        </div>
         {% endfor %}
         {% endif %}
+
+        {% block content %}
+
         {% endblock content %}
 
         <!-- FOOTER -->
@@ -49,6 +53,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
