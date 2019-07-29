@@ -40,13 +40,14 @@ urlpatterns = [
     path('room/<int:room_id>/', views.room, name='room'),
     path('room/<int:residence_id>/add', views.room_add, name='room_add'),
     path('room/<int:room_id>/update', views.room_update, name='room_update'),
+    path('room/<int:room_id>/delete', views.room_delete, name='room_delete'),
 
     path('equipment/<int:equipment_id>/', views.equipment, name='equipment'),
-    path('equipment/add/<int:room_id>/', views.equipment_add,
+    path('equipment/<int:room_id>/add/', views.equipment_add,
          name='equipment_add'),
-    path('equipment/update/<int:equipment_id>/',
+    path('equipment/<int:equipment_id>/update',
          views.equipment_update, name='equipment_update'),
-    path('equipment/delete/<int:pk>/',
+    path('equipment/<int:equipment_id>/delete/',
          views.equipment_delete, name='equipment_delete'),
 
     path('search/', views.search, name='search'),

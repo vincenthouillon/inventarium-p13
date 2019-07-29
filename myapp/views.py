@@ -274,6 +274,14 @@ def room_update(request, room_id):
         raise Http404()
 
 
+def room_delete(request, room_id):
+    if request.method == 'POST':
+        room = Room.objects.get(id=room_id)
+        room.delete()
+    return redirect('residence', residence_id=room.residence.id)
+# endregion
+
+
 @login_required
 def equipment_add(request, room_id):
     """Showing the add residence form."""
@@ -327,11 +335,12 @@ def equipment_update(request, equipment_id):
     else:
         raise Http404()
 
-def equipment_delete(request, pk):
+
+def equipment_delete(request, equipment_id):
     if request.method == 'POST':
-        equipment = Equipment.objects.get(pk=pk)
+        equipment = Equipment.objects.get(id=equipment_id)
         equipment.delete()
-    return redirect('dashboard')
+    return redirect('room', room_id=equipment.room.id)
 # endregion
 
 

@@ -20,6 +20,13 @@
 
         {% include 'layouts/navbar.html' %}
         {% block content %}
+        {% if form.messages %}
+        {% for field in form %}
+            {% for msg in field.messages %}
+            <div class="alert alert-success">{{ msg }}</div>
+            {% endfor %}
+        {% endfor %}
+        {% endif %}
         {% endblock content %}
 
         <!-- FOOTER -->

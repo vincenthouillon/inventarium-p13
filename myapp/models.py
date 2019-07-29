@@ -51,16 +51,12 @@ class Room(models.Model):
     def save(self):
         super().save()
 
-        img = Image.open(self.picture.path)
-
-        if img.height > 400 or img.width > 400:
-            output_size = (400, 400)
-            img.thumbnail(output_size)
-            img.save(self.picture.path)
-
-    def delete(self, *args, **kwargs):
-        self.picture.delete()
-        super().delete(*args, **kwargs)
+        if self.picture:
+            img = Image.open(self.picture.path)
+            if img.height > 400 or img.width > 400:
+                output_size = (400, 400)
+                img.thumbnail(output_size)
+                img.save(self.picture.path)
 
 
 class Category(models.Model):
@@ -94,15 +90,17 @@ class Equipment(models.Model):
         upload_to="equipments/invoice", null=True, blank=True,
         verbose_name="facture",
         help_text="Uniquement fichier PDF.",
-        validators=[FileExtensionValidator(allowed_extensions=['pdf'],
-                                           message="Uniquement fichier PDF.")])
+        validators=[FileExtensionValidator(
+            allowed_extensions=['pdf'],
+            message="Seul les fichiers .pdf sont acceptés.")])
     manual = models.FileField(
         upload_to="equipments/manual",
         null=True, blank=True,
         verbose_name="mode d'emploi",
         help_text="Uniquement fichier PDF.",
-        validators=[FileExtensionValidator(allowed_extensions=['pdf'],
-                                           message="Uniquement fichier PDF.")])
+        validators=[FileExtensionValidator(
+            allowed_extensions=['pdf'],
+            message="Seul les fichiers .pdf sont acceptés.")])
     is_active = models.BooleanField("Equipement actif", default=1)
 
     room = models.ForeignKey(
@@ -119,15 +117,9 @@ class Equipment(models.Model):
     def save(self):
         super().save()
 
-        img = Image.open(self.picture.path)
-
-        if img.height > 400 or img.width > 400:
-            output_size = (400, 400)
-            img.thumbnail(output_size)
-            img.save(self.picture.path)
-
-    def delete(self, *args, **kwargs):
-        self.picture.delete()
-        self.invoice.delete()
-        self.manual.delete()
-        super().delete(*args, **kwargs)
+        if self.picture:
+            img = Image.open(self.picture.path)
+            if img.height > 400 or img.width > 400:
+                output_size = (400, 400)
+                img.thumbnail(output_size)
+                img.save(self.picture.path)
