@@ -142,7 +142,6 @@ def user_delete(request):
     logout(request)
     messages.success(request, 'Votre compte est supprimé')
     return redirect('homepage')
-
 # endregion
 
 # region: display pages
