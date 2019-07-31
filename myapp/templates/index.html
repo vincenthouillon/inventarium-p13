@@ -85,10 +85,8 @@
                 <form id="login_form" method="POST">
                     {{ form | crispy }}
                     {% csrf_token %}
-                    <div class="text-right pt-2">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primo">S'identifier</button>
-                    </div>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-outline-primo">S'identifier</button>
                 </form>
                 </div>
           </div>

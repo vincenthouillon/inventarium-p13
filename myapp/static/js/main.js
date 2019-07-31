@@ -4,7 +4,6 @@
  * https://github.com/mariomka/bootstrap-auto-dismiss-alert
  * Licensed under the MIT license
  */
-
 ;(function ($) {
 
     'use strict';
@@ -24,7 +23,6 @@
 /*!
 * To make an entire row in a hotspot as a link
 */
-
 jQuery(document).ready(function($) {
     $(".clickable-row").click(function() {
         window.location = $(this).data("href");

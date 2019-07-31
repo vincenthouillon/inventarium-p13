@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load render_table from django_tables2 %}
+{% load querystring from django_tables2 %}
+{% load crispy_forms_tags %}
+{% block head_title %}Pièce(s){% endblock %}
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
+                <li class="breadcrumb-item"><a
+                        href="{% url 'residence' room.residence.id %}">{{ room.residence.name|capfirst }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ room.name|capfirst }}</li>
+            </ol>
+        </nav>
+        <div class="row">
+            <div class="col-10">
+                <h1 class="section-title">{{ room|capfirst }}</h1>
+            </div>
+            <div class="col-2 text-right mt-4">
+                <a href="{% url 'room' room.id %}" style="font-size: 25px;"><i class="fas fa-th"></i></a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            {% render_table equipments %}
+        </div>
+        <a class="btn btn-success btn-sm" href="{% querystring '_export'='xls' %}"><i class="fas fa-file-excel"></i> Download</a>
+    </div>
+</section>
+
+{% endblock content %}

@@ -31,10 +31,12 @@
             <p class="card-text m-0">{{ residence.adress|truncatechars:50 }}</p>
             <p class="card-text">{{ residence.zip_code }} {{ residence.city }}</p>
         </a>
-        <div class="card-text text-right mt-2">
-          <a href="{% url 'residence_update' residence.id %}" class="btn btn-secondary btn-sm">Modifier</a>
-          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmationModal">
-            Supprimer</button>
+        <div class="card-footer">
+            <form method="post" action="{% url 'residence_delete' residence.id %}">
+                {% csrf_token %}
+                <a href="{% url 'residence_update' residence.id %}" class="btn btn-secondary btn-sm">Modifier</a>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmationModal">
+                  Supprimer</button>
 
           <!-- Modal -->
           <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"

@@ -5,18 +5,25 @@
 
 <div class="section">
     <div class="container">
-            <h1 class="section-title">Connexion</h1>
+        <!-- <h1 class="section-title">Connexion</h1> -->
         <form id="login_form" method="POST" class="col-lg-5 col-sm-12">
-            {{ form | crispy }}
             {% csrf_token %}
-            <div class="sign-in">
-                    <a href="{% url 'register' %}">
-                            Créer un nouveau compte.</a>
-                    <button class="btn btn-primo" type="submit"><i class="fas fa-lock-open"></i> Se connecter</button>
-                </div>
-            <small class='text-muted ml-2'>
-                <a href="{% url 'homepage' %}">Mot de passe oublié !</a>
-            </small>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-2">
+                    Connexion
+                </legend>
+                {{ form | crispy }}
+            </fieldset>
+            <div class="form-group my-2">
+                <a href="{% url 'register' %}">
+                    Créer un nouveau compte.</a>
+                <button class="btn btn-outline-primo ml-2" type="submit"><i class="fas fa-lock-open"></i> Se connecter</button>
+            </div>
+            <div class="border-top">              
+                <small class='text-muted ml-2'>
+                    <a href="{% url 'homepage' %}">Mot de passe oublié ?</a>
+                </small>
+            </div>
         </form>
     </div>
 </div>

@@ -18,12 +18,14 @@
         <tr>
           <th>Image</th>
           <th>Equipement</th>
+          <th>Marque</th>
+          <th>Modèle</th>
           <th>Résidence</th>
           <th>Pièce</th>
         </tr>
       </thead>
       {% for equipment in equipments %}
-      <tbody>
+      <tbody">
         <tr class="clickable-row" data-href="{% url 'equipment' equipment.id %}" style="cursor:pointer;height:70px;">
           {% if equipment.picture %}
           <td>
@@ -35,6 +37,8 @@
           </td>
           {% endif %}
           <td class="align-middle">{{ equipment.name|capfirst }}</td>
+          <td class="align-middle">{{ equipment.brand|capfirst }}</td>
+          <td class="align-middle">{{ equipment.model|capfirst }}</td>
           <td class="align-middle">{{ equipment.room.residence|capfirst }}</td>
           <td class="align-middle">{{ equipment.room|capfirst }}</td>
         </tr>

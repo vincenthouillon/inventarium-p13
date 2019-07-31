@@ -30,11 +30,10 @@
         {% endif %}
       </div>
       <div class="col-lg-8 col-sm-12">
-        <div class="progress" style="height: 2px">
+        <div class="progress mb-2" style="height: 2px">
           <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
             aria-valuemax="100"></div>
         </div>
-        <p class="mt-2">{{ equipment.note }}</p>
         <table class="table-sm mx-2">
           <tr>
             <td class="small font-weight-bold">Marque :</td>
@@ -54,13 +53,14 @@
           </tr>
           <tr>
             <td class="small font-weight-bold">Garantie :</td>
-            <td class="text-success">{{ equipment.lenght_warranty }} mois</td>
+            <td class="text-success">{{ equipment.length_warranty }} mois</td>
           </tr>
           <tr>
             <td class="small font-weight-bold">Categorie :</td>
             <td>{{ equipment.category }}</td>
           </tr>
         </table>
+        <p class="mt-2">{{ equipment.note }}</p>
         <div class="mt-2">
           {% if equipment.invoice %}
           <a class="btn btn-outline-primo btn-sm" href="{{ equipment.invoice.url }}" target="_blank">
@@ -71,7 +71,7 @@
             <i class="fas fa-file-pdf"></i> Facture
           </span>
           {% endif %}
-          {% if manual %}
+          {% if equipment.manual %}
           <a class="btn btn-outline-primo btn-sm" href="{{ equipment.manual.url }}" target="_blank">
             <i class="fas fa-file-pdf"></i> Mode d'emploi
           </a>
@@ -83,7 +83,6 @@
           {% endif %}
         </div>
         <hr>
-        <div class="text-right">
           <form method="post" action="{% url 'equipment_delete' equipment.id %}">
             {% csrf_token %}
             <a href="{% url 'equipment_update' equipment.id %}" class="btn btn-secondary">Modifier</a>
@@ -113,7 +112,7 @@
             </div>
           </form>
         </div>
-      </div>
+    
     </div>
   </div>
 </div>

@@ -5,10 +5,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django_tables2 import RequestConfig
+from django_tables2.export.export import TableExport
 
 from .forms import (EquipmentForm, ResidenceForm, RoomForm, UserRegisterForm,
                     UserUpdateForm)
 from .models import Equipment, Residence, Room
+from .tables import EquipmentTable
 
 
 # region: Homepage and registration
@@ -130,6 +133,16 @@ def profile_update(request):
         u_form = UserUpdateForm(instance=request.user)
 
     return render(request, 'profile_update.html', {'u_form': u_form})
+
+
+@login_required
+def user_delete(request):
+    user = request.user
+    user.delete()
+    logout(request)
+    messages.success(request, 'Votre compte est supprimé')
+    return redirect('homepage')
+
 # endregion
 
 # region: display pages
@@ -172,6 +185,48 @@ def room(request, room_id):
 
 
 @login_required
+def room_equipment(request, room_id, record):
+    """
+    When you click on a line in the equipment table,
+    displays the details of a device.
+    """
+    get_equipment = get_object_or_404(Equipment, id=record)
+
+    if get_equipment.room.residence in Residence.objects.filter(
+            user=request.user):
+        equipments = get_object_or_404(Equipment, id=get_equipment.id)
+    else:
+        raise Http404()
+
+    return render(request, 'equipment.html', {
+        'equipment': equipments,
+    })
+
+
+@login_required
+def room_list(request, room_id):
+    """Displays an array of devices and add export in .xls."""
+    get_room = get_object_or_404(Room, id=room_id)
+
+    if get_room.residence in Residence.objects.filter(user=request.user):
+        equipments = EquipmentTable(Equipment.objects.filter(room=get_room))
+
+        RequestConfig(request).configure(equipments)
+
+        export_format = request.GET.get('_export', None)
+        if TableExport.is_valid_format(export_format):
+            exporter = TableExport(export_format, equipments)
+            return exporter.response('equipments.{}'.format(export_format))
+    else:
+        raise Http404()
+
+    return render(request, 'room_list.html', {
+        'room': get_room,
+        'equipments': equipments,
+    })
+
+
+@login_required
 def equipment(request, equipment_id):
     """Display the equipments in room."""
     get_equipment = get_object_or_404(Equipment, id=equipment_id)
@@ -186,6 +241,7 @@ def equipment(request, equipment_id):
         'equipment': equipments,
     })
 # endregion
+
 
 # region: forms
 @login_required
@@ -222,6 +278,14 @@ def residence_update(request, residence_id):
         u_form = ResidenceForm(instance=get_residence)
 
     return render(request, 'residence_update.html', {'u_form': u_form})
+
+
+def residence_delete(request, residence_id):
+    if request.method == 'POST':
+        residence = get_object_or_404(
+            Residence, pk=residence_id, user=request.user)
+        residence.delete()
+    return redirect('dashboard')
 
 
 @login_required
@@ -275,11 +339,14 @@ def room_update(request, room_id):
 
 
 def room_delete(request, room_id):
-    if request.method == 'POST':
-        room = Room.objects.get(id=room_id)
-        room.delete()
-    return redirect('residence', residence_id=room.residence.id)
-# endregion
+    get_room = get_object_or_404(Room, id=room_id)
+
+    # If the residence belongs to the residences of the user
+    if get_room.residence in Residence.objects.filter(user=request.user):
+        if request.method == 'POST':
+            room = Room.objects.get(id=get_room.id)
+            room.delete()
+    return redirect('residence', residence_id=get_room.residence.id)
 
 
 @login_required
@@ -341,13 +408,19 @@ def equipment_update(request, equipment_id):
 
 
 def equipment_delete(request, equipment_id):
-    if request.method == 'POST':
-        equipment = Equipment.objects.get(id=equipment_id)
-        equipment.delete()
-    return redirect('room', room_id=equipment.room.id)
+    get_equipment = get_object_or_404(Equipment, id=equipment_id)
+
+    # If the residence belongs to the residences of the user
+    if get_equipment.room.residence in Residence.objects.filter(
+            user=request.user):
+        if request.method == 'POST':
+            equipment = Equipment.objects.get(id=get_equipment)
+            equipment.delete()
+    return redirect('room', room_id=get_equipment.room.id)
 # endregion
 
 
+# region: search equipments
 @login_required
 def search(request):
     query = request.GET.get('query')
@@ -378,3 +451,4 @@ def equipments_all(request):
     equipments = Equipment.objects.all()
 
     return render(request, 'equipments_all.html', {'equipments': equipments})
+# endregion

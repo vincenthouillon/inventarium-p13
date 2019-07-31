@@ -14,7 +14,14 @@
         <li class="breadcrumb-item active" aria-current="page">{{ room.name|capfirst }}</li>
       </ol>
     </nav>
-    <h1 class="section-title">{{ room|capfirst }}</h1>
+    <div class="row">
+      <div class="col-10">
+        <h1 class="section-title">{{ room|capfirst }}</h1>
+      </div>
+      <div class="col-2 text-right mt-4">
+        <a href="{% url 'room_list' room.id%}" style="font-size: 25px;"><i class="fas fa-table"></i></a>
+      </div>
+    </div>
     {% if equipments %}
     <div class="card-deck">
       <div class="card mb-2" style="max-width: 22rem;min-width: 14rem;">
@@ -32,13 +39,13 @@
           {% if equipment.picture %}
           <img class="card-img-top" src="{{ equipment.picture.url }}" alt="{{ equipment.name }}">
           {% else %}
-          <img src="{% static 'img/houseCrossSection.jpg' %}" class="card-img-top" alt="...">
+          <img src="{% static 'img/noPicture.png' %}" class="card-img-top" alt="...">
           {% endif %}
           <div class="card-body">
             <h5 class="card-title text-dark">{{ equipment.name|capfirst }}</h5>
             <p class="card-text">{{ equipment.note|truncatechars:50 }}</p>
         </a>
-        <div class="card-text text-right mt-2">
+        <div class="card-footer">
           <form method="post" action="{% url 'equipment_delete' equipment.id %}">
             {% csrf_token %}
             <a href="{% url 'equipment' equipment.id %}" class="btn btn-primo btn-sm">Détail</a>

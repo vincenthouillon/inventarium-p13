@@ -79,7 +79,7 @@ class Equipment(models.Model):
                                 null=True, blank=True)
     date_purchase = models.DateField(
         "date d'achat", blank=True, default=datetime.now)
-    lenght_warranty = models.IntegerField(
+    length_warranty = models.IntegerField(
         "durée de garantie", null=True, help_text="Durée exprimée en mois",
         default="48", blank=True)
     note = models.TextField("note", null=True, blank=True)

@@ -6,13 +6,15 @@
 <section class="section">
 
     <div class="container">
-        <h1>Mise à jour de la résidence</h1>
         <form method="POST" class="col-lg-5 col-sm-12">
             {% csrf_token %}
-            {{ u_form | crispy}}
-            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Annuler</a>
-            <button type="button" class="btn btn-primo" data-toggle="modal" data-target="#confirmationModal">
-                Mettre à jour</button>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-2">Mise à jour de la résidence</legend>
+                {{ u_form | crispy}}
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary">Annuler</a>
+                <button type="button" class="btn btn-primo" data-toggle="modal" data-target="#confirmationModal">
+                    Mettre à jour</button>
+            </fieldset>
             <!-- Modal -->
             <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
                 aria-labelledby="confirmationModalLabel" aria-hidden="true">

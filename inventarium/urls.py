@@ -29,6 +29,7 @@ urlpatterns = [
     path('signout/', views.signout, name='signout'),
     path('profile/', views.profile, name='profile'),
     path('profile/update', views.profile_update, name='profile_update'),
+    path('profile/delete', views.user_delete, name='user_delete'),
     path('about/', views.about, name='about'),
 
     path('dashboard/', views.dashboard, name='dashboard'),
@@ -36,8 +37,13 @@ urlpatterns = [
     path('residence/<int:residence_id>', views.residence, name='residence'),
     path('residence/<int:residence_id>/update',
          views.residence_update, name='residence_update'),
+    path('residence/<int:residence_id>/delete', views.residence_delete,
+         name='residence_delete'),
 
     path('room/<int:room_id>/', views.room, name='room'),
+    path('room/<int:room_id>/list', views.room_list, name='room_list'),
+    path('room/<int:room_id>/<record>/', views.room_equipment,
+         name='room_equipment'),
     path('room/<int:residence_id>/add', views.room_add, name='room_add'),
     path('room/<int:room_id>/update', views.room_update, name='room_update'),
     path('room/<int:room_id>/delete', views.room_delete, name='room_delete'),

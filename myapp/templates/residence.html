@@ -36,7 +36,7 @@
           <div class="card-body">
             <h5 class="card-title text-dark">{{ room.name|capfirst }}</h5>
         </a>
-        <div class="card-text text-right mt-2">
+        <div class="card-footer">
           <form method="post" action="{% url 'room_delete' room.id %}">
             {% csrf_token %}
             <a href="{% url 'room_update' room.id %}" class="btn btn-secondary btn-sm">Modifier</a>

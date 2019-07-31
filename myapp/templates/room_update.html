@@ -5,10 +5,12 @@
 
 <section class="section">
     <div class="container">
-        <h1 class="section-title">Mise à jour de la pièce</h1>
         <form method="post" enctype="multipart/form-data" class="col-lg-5 col-sm-12">
             {% csrf_token %}
+            <fieldset class="form-group">
+                    <legend class="border-bottom mb-2">Mise à jour de la pièce</legend>
             {{ form | crispy }}
+            </fieldset>
             <a href="{% url 'residence' residence.id %}" class="btn btn-secondary">Annuler</a>
             <button type="button" class="btn btn-primo" data-toggle="modal" data-target="#confirmationModal">
                     Mettre à jour</button>
