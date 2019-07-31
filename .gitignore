@@ -17,7 +17,6 @@ local_settings.py
 db.sqlite3
 migrations
 staticfiles
-media/
 
 # Environments
 .env
