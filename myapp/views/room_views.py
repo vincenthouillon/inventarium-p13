@@ -24,7 +24,7 @@ def room(request, room_id):
     else:
         raise Http404()
 
-    return render(request, 'room/room.html', {
+    return render(request, 'myapp/room/room.html', {
         'room': get_room,
         'equipments': equipments,
     })
@@ -51,7 +51,7 @@ def room_list(request, room_id):
     else:
         raise Http404()
 
-    return render(request, 'room/room_list.html', {
+    return render(request, 'myapp/room/room_list.html', {
         'room': get_room,
         'equipments': equipments,
     })
@@ -77,7 +77,7 @@ def room_add(request, residence_id):
         else:
             u_form = RoomForm()
 
-    return render(request, 'room/room_add.html', {
+    return render(request, 'myapp/room/room_add.html', {
         'form': RoomForm,
         'residence': get_residence
     })
@@ -107,7 +107,7 @@ def room_update(request, room_id):
         else:
             u_form = RoomForm(instance=get_room)
 
-        return render(request, 'room/room_update.html', {
+        return render(request, 'myapp/room/room_update.html', {
             'form': u_form,
             'residence': get_room.residence
         })
@@ -132,7 +132,7 @@ def room_equipment(request, room_id, record):
     else:
         raise Http404()
 
-    return render(request, 'equipment/equipment.html', {
+    return render(request, 'myapp/equipment/equipment.html', {
         'equipment': equipments,
     })
 

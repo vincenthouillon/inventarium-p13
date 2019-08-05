@@ -32,13 +32,13 @@ def index(request):
 
     form = AuthenticationForm()
 
-    template_name = 'index.html'
+    template_name = 'myapp/index.html'
     return render(request, template_name, {'form': form})
 
 
 def about(request):
     """Display about page."""
-    template_name = 'about.html'
+    template_name = 'myapp/about.html'
     return render(request, template_name)
 
 
@@ -52,11 +52,11 @@ def register(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect(reverse('index'))
+            return redirect(reverse('homepage'))
     else:
         form = UserRegisterForm()
 
-    template_name = 'register.html'
+    template_name = 'myapp/register.html'
     context = {
         'form': form,
         'title': "S'enregister"
@@ -66,7 +66,7 @@ def register(request):
 
 def terms(request):
     """Display about page."""
-    template_name = 'terms.html'
+    template_name = 'myapp/terms.html'
     return render(request, template_name)
 
 
@@ -95,7 +95,7 @@ def signin(request):
     form = AuthenticationForm()
 
     return render(request=request,
-                  template_name="signin.html",
+                  template_name="myapp/signin.html",
                   context={"form": form})
 
 
@@ -109,7 +109,7 @@ def signout(request):
 @login_required
 def profile(request):
     """Display the user profile page."""
-    return render(request, 'profile.html', {'user': request.user})
+    return render(request, 'myapp/profile.html', {'user': request.user})
 
 
 @login_required
@@ -124,7 +124,7 @@ def profile_update(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
 
-    return render(request, 'profile_update.html', {'u_form': u_form})
+    return render(request, 'myapp/profile_update.html', {'u_form': u_form})
 
 
 @login_required

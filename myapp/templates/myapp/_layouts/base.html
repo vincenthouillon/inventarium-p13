@@ -1,8 +1,8 @@
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,15 +18,15 @@
 <body>
     <div class="wrapper">
 
-        {% include '_layouts/navbar.html' %}
+        {% include 'myapp/_layouts/navbar.html' %}
 
         {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissable" data-auto-dismiss>
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{ message }}
-        </div>
-        {% endfor %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissable" data-auto-dismiss>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message }}
+            </div>
+            {% endfor %}
         {% endif %}
 
         {% block content %}
@@ -42,7 +42,6 @@
             </div>
         </footer>
     </div>
-
     <!-- SCRIPTS FOR BOOTSTRAP -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -55,5 +54,4 @@
     </script>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
-
 </html>

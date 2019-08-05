@@ -1,41 +1,54 @@
-{% extends '_layouts/base.html' %}
+{% extends 'myapp/_layouts/base.html' %}
 {% load static %}
-{% block head_title %}Mon tableau de bord{% endblock %}
+{% load crispy_forms_tags %}
+{% block head_title %}Pièce(s){% endblock %}
 {% block content %}
 
 <section class="section">
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Acceuil</li>
+                <li class="breadcrumb-item"><a href="{% url 'homepage' %}">Acceuil</a></li>
+                <li class="breadcrumb-item"><a
+                        href="{% url 'residence' room.residence.id %}">{{ room.residence.name|capfirst }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ room.name|capfirst }}</li>
             </ol>
         </nav>
-        <h1 class="section-title">Mes résidences</h1>
-        {% if residences %}
+        <div class="row">
+            <div class="col-10">
+                <h1 class="section-title">{{ room|capfirst }}</h1>
+            </div>
+            <div class="col-2 text-right mt-4">
+                <a href="{% url 'room_list' room.id%}" style="font-size: 25px;"><i class="fas fa-table"></i></a>
+            </div>
+        </div>
+        {% if equipments %}
         <div class="card-deck">
             <div class="card mb-2" style="max-width: 22rem;min-width: 14rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Ajouter une résidence</h5>
+                    <h5 class="card-title">Ajouter un équipement</h5>
                     <p class="card-tex text-center">
-                        <a href="{% url 'residence_add' %}" class="stretched-link" style="font-size: 120px"><i
+                        <a href="{% url 'equipment_add' room.id %}" class="stretched-link" style="font-size: 120px"><i
                                 class="fas fa-plus-circle"></i>
                         </a></p>
                 </div>
             </div>
-            {% for residence in residences %}
+            {% for equipment in equipments %}
             <div class="card mb-2" style="max-width: 22rem;min-width: 14rem;">
-                <a href="{% url 'residence' residence.id %}">
-                    <img src="{% static 'img/houseCrossSection.jpg' %}" class="card-img-top" alt="...">
+                <a href="{% url 'equipment' equipment.id %}">
+                    {% if equipment.picture %}
+                    <img class="card-img-top" src="{{ equipment.picture.url }}" alt="{{ equipment.name }}">
+                    {% else %}
+                    <img src="{% static 'img/noPicture.png' %}" class="card-img-top" alt="...">
+                    {% endif %}
                     <div class="card-body">
-                        <h5 class="card-title text-dark">{{ residence.name|capfirst }}</h5>
-                        <p class="card-text m-0">{{ residence.adress|truncatechars:50 }}</p>
-                        <p class="card-text">{{ residence.zip_code }} {{ residence.city }}</p>
+                        <h5 class="card-title text-dark">{{ equipment.name|capfirst }}</h5>
+                        <p class="card-text">{{ equipment.note|truncatechars:50 }}</p>
                 </a>
                 <div class="card-footer">
-                    <form method="post" action="{% url 'residence_delete' residence.id %}">
+                    <form method="post" action="{% url 'equipment_delete' equipment.id %}">
                         {% csrf_token %}
-                        <a href="{% url 'residence_update' residence.id %}"
-                            class="btn btn-secondary btn-sm">Modifier</a>
+                        <a href="{% url 'equipment' equipment.id %}" class="btn btn-primo btn-sm">Détail</a>
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                             data-target="#confirmationModal">
                             Supprimer</button>
@@ -52,7 +65,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Êtes-vous sûr(e) de vouloir supprimer cette résidence ?</p>
+                                        <p>Êtes-vous sûr(e) de vouloir supprimer cet équipement ?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary btn-sm"
@@ -62,20 +75,22 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
     {% else %}
-    <div class="card mb-2" style="max-width: 22rem;min-width: 14rem;">
+    <div class="card mb-2" style="max-width: 22rem;min-width: 16rem;">
         <div class="card-body">
-            <h5 class="card-title">Ajouter une résidence</h5>
-            <p class="card-tex text-center">
-                <a href="{% url 'residence_add' %}" class="stretched-link" style="font-size: 120px"><i
+            <h5 class="card-title">Ajouter un équipement</h5>
+            <p class="card-tex text-center mt-2">
+                <a href="{% url 'equipment_add' room.id %}" class="stretched-link" style="font-size: 120px"><i
                         class="fas fa-plus-circle"></i>
-                </a></p>
-            <p>Oups! Vous n'avez aucune résidence d'enregistrée !</p>
+                </a>
+                <p class="text-danger">Vous n'avez aucun équipement d'enregistré pour le moment.</p>
+            </p>
         </div>
     </div>
     {% endif %}

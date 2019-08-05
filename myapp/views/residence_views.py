@@ -12,7 +12,7 @@ def homepage(request):
     qs_residences = Residence.objects.filter(
         user=request.user).order_by('name')
 
-    return render(request, 'residence/homepage.html',
+    return render(request, 'myapp/residence/homepage.html',
                   {'residences': qs_residences, })
 
 
@@ -27,7 +27,7 @@ def residence(request, residence_id):
         Residence, id=residence_id, user=request.user)
     rooms = Room.objects.filter(residence=get_residence).order_by('name')
 
-    return render(request, 'residence/residence.html', {
+    return render(request, 'myapp/residence/residence.html', {
         'rooms': rooms,
         'residence': get_residence,
     })
@@ -42,10 +42,10 @@ def residence_add(request):
             home = form.save(commit=False)
             home.user = request.user  # The logged user
             home.save()
-            return redirect('residence/homepage')
+            return redirect('homepage')
     else:
         form = ResidenceForm()
-    return render(request, 'residence/residence_add.html', {
+    return render(request, 'myapp/residence/residence_add.html', {
         'form': form,
         'user': request.user
     })
@@ -67,11 +67,11 @@ def residence_update(request, residence_id):
             u_form.save()
             messages.success(
                 request, f'Votre résidence a bien été mise à jour')
-            return redirect('residence/homepage')
+            return redirect('homepage')
     else:
         u_form = ResidenceForm(instance=get_residence)
 
-    return render(request, 'residence/residence_update.html',
+    return render(request, 'myapp/residence/residence_update.html',
                   {'u_form': u_form})
 
 
@@ -85,4 +85,4 @@ def residence_delete(request, residence_id):
         residence = get_object_or_404(
             Residence, pk=residence_id, user=request.user)
         residence.delete()
-    return redirect('residence/homepage')
+    return redirect('homepage')

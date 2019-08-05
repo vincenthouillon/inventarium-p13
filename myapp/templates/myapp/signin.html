@@ -1,11 +1,10 @@
-{% extends '_layouts/base.html' %}
+{% extends 'myapp/_layouts/base.html' %}
 {% load crispy_forms_tags %}
 {% block head_title %}S'identifier{% endblock %}
 {% block content %}
 
 <div class="section">
     <div class="container">
-        <!-- <h1 class="section-title">Connexion</h1> -->
         <form id="login_form" method="POST" class="col-lg-5 col-sm-12">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -17,11 +16,12 @@
             <div class="form-group my-2">
                 <a href="{% url 'register' %}">
                     Créer un nouveau compte.</a>
-                <button class="btn btn-outline-primo ml-2" type="submit"><i class="fas fa-lock-open"></i> Se connecter</button>
+                <button class="btn btn-outline-primo ml-2" type="submit">
+                    <i class="fas fa-lock-open"></i> Se connecter</button>
             </div>
             <div class="border-top">              
                 <small class='text-muted ml-2'>
-                    <a href="{% url 'index' %}">Mot de passe oublié ?</a>
+                    <a href="{% url 'password_reset' %}">Mot de passe oublié ?</a>
                 </small>
             </div>
         </form>

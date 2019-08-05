@@ -22,7 +22,7 @@ def equipment(request, equipment_id):
     else:
         raise Http404()
 
-    return render(request, 'equipment/equipment.html', {
+    return render(request, 'myapp/equipment/equipment.html', {
         'equipment': equipments,
     })
 
@@ -54,7 +54,7 @@ def equipment_update(request, equipment_id):
         else:
             u_form = EquipmentForm(instance=get_equipment)
 
-        return render(request, 'equipment/equipment_update.html', {
+        return render(request, 'myapp/equipment/equipment_update.html', {
             'form': u_form,
             'equipment': get_equipment,
         })
@@ -101,7 +101,7 @@ def equipment_add(request, room_id):
             else:
                 u_form = EquipmentForm()
 
-        return render(request, 'equipment/equipment_add.html', {
+        return render(request, 'myapp/equipment/equipment_add.html', {
             'form': EquipmentForm,
             'room_id': get_room,
         })
@@ -139,7 +139,7 @@ def search(request):
         equipments = queryset.filter(name__icontains=query)
         title = query
 
-    return render(request, 'equipment/search.html', {
+    return render(request, 'myapp/equipment/search.html', {
         'equipments': equipments,
         'title': title
     })
@@ -149,5 +149,5 @@ def __equipments_all(request):
     """Page needed for research."""
     equipments = Equipment.objects.all()
 
-    return render(request, 'equipment/equipments_all.html',
+    return render(request, 'myapp/equipment/equipments_all.html',
                   {'equipments': equipments})
