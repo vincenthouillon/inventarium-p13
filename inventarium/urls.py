@@ -22,7 +22,7 @@ from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage, name='homepage'),
+    path('', views.index, name='index'),
     path('register/', views.register, name='register'),
     path('register/terms/', views.terms, name='terms'),
     path('signin/', views.signin, name='signin'),
@@ -32,8 +32,8 @@ urlpatterns = [
     path('profile/delete', views.user_delete, name='user_delete'),
     path('about/', views.about, name='about'),
 
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('dashboard/residence_add', views.residence_add, name='residence_add'),
+    path('homepage/', views.homepage, name='homepage'),
+    path('homepage/residence_add', views.residence_add, name='residence_add'),
     path('residence/<int:residence_id>', views.residence, name='residence'),
     path('residence/<int:residence_id>/update',
          views.residence_update, name='residence_update'),
@@ -42,11 +42,11 @@ urlpatterns = [
 
     path('room/<int:room_id>/', views.room, name='room'),
     path('room/<int:room_id>/list', views.room_list, name='room_list'),
-    path('room/<int:room_id>/<record>/', views.room_equipment,
-         name='room_equipment'),
     path('room/<int:residence_id>/add', views.room_add, name='room_add'),
     path('room/<int:room_id>/update', views.room_update, name='room_update'),
     path('room/<int:room_id>/delete', views.room_delete, name='room_delete'),
+    path('room/<int:room_id>/<record>/', views.room_equipment,
+         name='room_equipment'),
 
     path('equipment/<int:equipment_id>/', views.equipment, name='equipment'),
     path('equipment/<int:room_id>/add/', views.equipment_add,

@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends '_layouts/base.html' %}
 {% load static %}
 
 {% block head_title %}A propos{% endblock %}
@@ -6,95 +6,96 @@
 {% block content %}
 
 <div class="section">
-        <div class="container">
-                <h2 class="section-title">A propos</h2>
-                <p>Inventarium est le projet final d'une formation issue du <a
-                                href="https://openclassrooms.com/fr/paths/68-developpeur-dapplication-python"
-                                title="Open Classrooms - Développeur d'application Python" target="_blank">
-                                pacours développeur d'application - Python</a> proposé par <a
-                                href="https://openclassrooms.com/fr/" title="Site d'OpenClassrooms"
-                                target="_blank">OpenClassrooms</a>. Il s'agit de développer un projet
-                        libre avec une portée sociale.</p>
-                <p class="font-italic"><i class="fas fa-quote-left"></i> Ce service vous permet de rassembler l'ensemble de vos factures d'équipements
-                        présents dans vos maisons, afin de les retrouver facilement et depuis n'importe où.
-                        Inventarium vous donne également des informations comme la durée de vie et la valeur
-                        résiduelle de l'équipement ou bien s'il est encore couvert par sa garantie". <i class="fas fa-quote-right"></i></p>
+    <div class="container">
+        <h2 class="section-title">A propos</h2>
+        <p>Inventarium est le projet final d'une formation issue du <a
+                href="https://openclassrooms.com/fr/paths/68-developpeur-dapplication-python"
+                title="Open Classrooms - Développeur d'application Python" target="_blank">
+                pacours développeur d'application - Python</a> proposé par <a href="https://openclassrooms.com/fr/"
+                title="Site d'OpenClassrooms" target="_blank">OpenClassrooms</a>. Il s'agit de développer un projet
+            libre avec une portée sociale.</p>
+        <p class="font-italic"><i class="fas fa-quote-left"></i> Ce service vous permet de rassembler l'ensemble de vos
+            factures d'équipements
+            présents dans vos maisons, afin de les retrouver facilement et depuis n'importe où.
+            Inventarium vous donne également des informations comme la durée de vie et la valeur
+            résiduelle de l'équipement ou bien s'il est encore couvert par sa garantie". <i
+                class="fas fa-quote-right"></i></p>
 
-                <h2 class="section-title">Mentions légales</h2>
-                <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Serveur hébergé par : <a href="https://azure.microsoft.com/fr-fr/"
-                                        title="Microsoft Azure website" target=_blank>
-                                        <i class="fab fa-microsoft"></i> Microsoft Azure</a></li>
-                        <li class="list-group-item">Framework Python - Django : <a
-                                        href="https://www.djangoproject.com/" title="Django website" target=_blank>
-                                        <i class="fab fa-python"></i> Django</a></li>
-                        <li class="list-group-item">Base de données : <a
-                                        href="https://www.postgresql.org" title="Postgresql website" target=_blank>
-                                        <i class="fas fa-database"></i> PostgreSQL</a></li>
-                        <li class="list-group-item">Framework de développement web : <a
-                                        href="https://getbootstrap.com/" title="Boostrap website" target=_blank>
-                                        <i class="fab fa-bootstrap"></i> Boostrap</a></li>
-                        <li class="list-group-item">Image sur la page d'accueil : <a
-                                        href="http://www.freepik.com/vectorpouch" title="Freepik website" target=_blank>
-                                        <i class="fas fa-image"></i> Designed by vectorpouch / Freepik</a></li>
-                        <li class="list-group-item">Icônes : <a
-                                        href="https://fontawesome.com/" title="Font Awesome website" target=_blank>
-                                        <i class="fab fa-font-awesome-flag"></i> Font Awesome</a></li>
-                        <li class="list-group-item">Préprocesseur CSS Sass : <a
-                                        href="https://sass-lang.com" title="Sass website" target=_blank>
-                                        <i class="fab fa-sass"></i> Sass</a></li>
-                        <li class="list-group-item">Gestion de versions : <a
-                                        href="http://www.git-scm.com" title="Git website" target=_blank>
-                                        <i class="fab fa-git-square"></i> Git</a></li>
-                        <li class="list-group-item">Hébergement du code source : <a
-                                        href="http://www.github.com/vincenthouillon/inventarium-p13" title="Github website" target=_blank>
-                                        <i class="fab fa-github"></i> Github</a></li>
-                        <li class="list-group-item">Intégration continue : <a
-                                        href="http://www.travis-ci.com" title="Travis CI website" target=_blank>
-                                        <img src="{% static 'img/travis.png' %}" height="16" width="16"> Travis CI</a></li>
-                        <li class="list-group-item">Suivi des erreurs : <a
-                                        href="https://sentry.io/welcome/" title="Sentry website" target=_blank>
-                                        <img src="{% static 'img/sentry.png' %}" height="16" width="16"> Sentry</a></li>
-                </ul>
-                <br>
+        <h2 class="section-title">Mentions légales</h2>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Serveur hébergé par : <a href="https://azure.microsoft.com/fr-fr/"
+                    title="Microsoft Azure website" target=_blank>
+                    <i class="fab fa-microsoft"></i> Microsoft Azure</a></li>
+            <li class="list-group-item">Framework Python - Django : <a href="https://www.djangoproject.com/"
+                    title="Django website" target=_blank>
+                    <i class="fab fa-python"></i> Django</a></li>
+            <li class="list-group-item">Base de données : <a href="https://www.postgresql.org"
+                    title="Postgresql website" target=_blank>
+                    <i class="fas fa-database"></i> PostgreSQL</a></li>
+            <li class="list-group-item">Framework de développement web : <a href="https://getbootstrap.com/"
+                    title="Boostrap website" target=_blank>
+                    <i class="fab fa-bootstrap"></i> Boostrap</a></li>
+            <li class="list-group-item">Image sur la page d'accueil : <a href="http://www.freepik.com/vectorpouch"
+                    title="Freepik website" target=_blank>
+                    <i class="fas fa-image"></i> Designed by vectorpouch / Freepik</a></li>
+            <li class="list-group-item">Icônes : <a href="https://fontawesome.com/" title="Font Awesome website"
+                    target=_blank>
+                    <i class="fab fa-font-awesome-flag"></i> Font Awesome</a></li>
+            <li class="list-group-item">Préprocesseur CSS Sass : <a href="https://sass-lang.com" title="Sass website"
+                    target=_blank>
+                    <i class="fab fa-sass"></i> Sass</a></li>
+            <li class="list-group-item">Gestion de versions : <a href="http://www.git-scm.com" title="Git website"
+                    target=_blank>
+                    <i class="fab fa-git-square"></i> Git</a></li>
+            <li class="list-group-item">Hébergement du code source : <a
+                    href="http://www.github.com/vincenthouillon/inventarium-p13" title="Github website" target=_blank>
+                    <i class="fab fa-github"></i> Github</a></li>
+            <li class="list-group-item">Intégration continue : <a href="http://www.travis-ci.com"
+                    title="Travis CI website" target=_blank>
+                    <img src="{% static 'img/travis.png' %}" height="16" width="16"> Travis CI</a></li>
+            <li class="list-group-item">Suivi des erreurs : <a href="https://sentry.io/welcome/" title="Sentry website"
+                    target=_blank>
+                    <img src="{% static 'img/sentry.png' %}" height="16" width="16"> Sentry</a></li>
+        </ul>
+        <br>
 
-                <h3 class="section-title">Données personnelles</h3>
-                <p>Les informations vous concernant sont destinées à <b><a
-                                        href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>.<br>
-                        Vous disposez d'un droit d'accés, de modification, de rectification et de suppression
-                        des données qui vous concernent <small>(art. 34 de la loi "Informatique et
-                                Libertés")</small>.<br>
-                        Pour l'exercer, utilisez le formulaire de contact.</p>
+        <h3 class="section-title">Données personnelles</h3>
+        <p>Les informations vous concernant sont destinées à <b><a
+                    href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>.<br>
+            Vous disposez d'un droit d'accés, de modification, de rectification et de suppression
+            des données qui vous concernent <small>(art. 34 de la loi "Informatique et
+                Libertés")</small>.<br>
+            Pour l'exercer, utilisez le formulaire de contact.</p>
 
-                <h3 class="section-title">Conditions générales d’utilisation du site et des services proposés.</h3>
-                <p>Ce site est normalement accessible à tout moment aux utilisateurs. Une interruption pour raison de
-                        maintenance technique peut être toutefois décidée par Vincent Houillon, qui s’efforcera alors de
-                        communiquer préalablement aux utilisateurs les dates et heures de l’intervention.</p>
+        <h3 class="section-title">Conditions générales d’utilisation du site et des services proposés.</h3>
+        <p>Ce site est normalement accessible à tout moment aux utilisateurs. Une interruption pour raison de
+            maintenance technique peut être toutefois décidée par Vincent Houillon, qui s’efforcera alors de
+            communiquer préalablement aux utilisateurs les dates et heures de l’intervention.</p>
 
-                <h3 class="section-title">Description des services fournis</h3>
-                <p>Vincent Houillon s’efforce de fournir sur le site <b><a
-                                        href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>
-                        des informations aussi
-                        précises que possible. Toutefois, il ne pourra être tenue responsable des omissions, des
-                        inexactitudes et des carences dans la mise à jour, qu’elles soient de son fait ou du fait des
-                        tiers
-                        partenaires qui lui fournissent ces informations.</p>
+        <h3 class="section-title">Description des services fournis</h3>
+        <p>Vincent Houillon s’efforce de fournir sur le site <b><a
+                    href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>
+            des informations aussi
+            précises que possible. Toutefois, il ne pourra être tenue responsable des omissions, des
+            inexactitudes et des carences dans la mise à jour, qu’elles soient de son fait ou du fait des
+            tiers
+            partenaires qui lui fournissent ces informations.</p>
 
-                <p>Le site <b><a
-                                        href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>
-                        est mis à jour régulièrement par Vincent Houillon. De la même
-                        façon, les mentions légales peuvent être modifiées à tout moment : elles s’imposent néanmoins à
-                        l’utilisateur qui est invité à s’y référer le plus souvent possible afin d’en prendre
-                        connaissance.</p>
+        <p>Le site <b><a
+                    href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>
+            est mis à jour régulièrement par Vincent Houillon. De la même
+            façon, les mentions légales peuvent être modifiées à tout moment : elles s’imposent néanmoins à
+            l’utilisateur qui est invité à s’y référer le plus souvent possible afin d’en prendre
+            connaissance.</p>
 
-                <p>Tous les informations indiquées sur le site <b><a
-                                        href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>
-                        sont données à titre indicatif,
-                        et sont susceptibles d’évoluer. Par ailleurs, les renseignements figurant sur le site
-                        <b><a
-                                        href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>
-                        ne sont pas exhaustifs.</p>
-        </div>
+        <p>Tous les informations indiquées sur le site <b><a
+                    href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>
+            sont données à titre indicatif,
+            et sont susceptibles d’évoluer. Par ailleurs, les renseignements figurant sur le site
+            <b><a
+                    href="http://inventarium.francecentral.cloudapp.azure.com/">inventarium.francecentral.clouapp.azure.com</a></b>
+            ne sont pas exhaustifs.</p>
+    </div>
 </div>
 
 {% endblock content %}

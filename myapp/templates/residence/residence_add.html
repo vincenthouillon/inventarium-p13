@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends '_layouts/base.html' %}
 {% load crispy_forms_tags %}
 {% block head_title %}Ajout d'une résidence{% endblock %}
 {% block content %}
@@ -9,7 +9,7 @@
             {% csrf_token %}
             {{ form | crispy }}
 
-            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Annuler</a>
+            <a href="{% url 'homepage' %}" class="btn btn-secondary">Annuler</a>
             <button type="submit" class="btn btn-primo">Ajouter</button>
         </form>
 {% endblock content %}

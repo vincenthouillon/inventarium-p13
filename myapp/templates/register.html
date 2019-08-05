@@ -1,54 +1,54 @@
-{% extends 'layouts/base.html' %}
+{% extends '_layouts/base.html' %}
 {% load crispy_forms_tags %}
 {% block head_title %}S'enregister{% endblock %}
 {% block content %}
 
 <section class="section">
-  <div class="container">
-    <form method="POST" class="col-lg-10 col-sm-12">
-      {% csrf_token %}
-      <fieldset class="form-group">
-        <legend class="border-bottom mb-2">Créer un nouveau compte</legend>
-        <div class="form-row">
-          <div class="form-group col-md-6 my-0">
-            {{ form.username|as_crispy_field }}
-          </div>
-          <div class="form-group col-md-6 my-0">
-            {{ form.email|as_crispy_field }}
-          </div>
+    <div class="container">
+        <form method="POST" class="col-lg-10 col-sm-12">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-2">Créer un nouveau compte</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-6 my-0">
+                        {{ form.username|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 my-0">
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row my-0">
+                    <div class="form-group col-md-6 my-0">
+                        {{ form.last_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 my-0">
+                        {{ form.first_name|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 my-0">
+                        {{ form.password1|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 my-0">
+                        {{ form.password2|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        <small>{{ form.terms|as_crispy_field }}</small>
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    <button class="btn btn-outline-primo" type="submit">
+                        Se connecter</button>
+                </div>
+            </fieldset>
+        </form>
+        <div class="border-top">
+            <small class="text-muted"><a href="{% url 'signin' %}">
+                    Se connecter à un compte existant</a></small>
         </div>
-        <div class="form-row my-0">
-          <div class="form-group col-md-6 my-0">
-            {{ form.last_name|as_crispy_field }}
-          </div>
-          <div class="form-group col-md-6 my-0">
-            {{ form.first_name|as_crispy_field }}
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6 my-0">
-            {{ form.password1|as_crispy_field }}
-          </div>
-          <div class="form-group col-md-6 my-0">
-            {{ form.password2|as_crispy_field }}
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6 mb-0">
-            <small>{{ form.terms|as_crispy_field }}</small>
-          </div>
-        </div>
-        <div class="form-group mb-1">
-          <button class="btn btn-outline-primo" type="submit">
-            Se connecter</button>
-        </div>
-      </fieldset>
-    </form>
-    <div class="border-top">
-      <small class="text-muted"><a href="{% url 'signin' %}">
-          Se connecter à un compte existant</a></small>
     </div>
-  </div>
 </section>
 
 {% endblock content %}

@@ -1,90 +1,142 @@
-from django.test import TestCase, SimpleTestCase
-from .models import User, Residence
+from django.test import SimpleTestCase, TestCase
 from django.urls import resolve, reverse
-from .views import homepage, residence, equipment, room, residence_add
+
+import myapp.views as views
+
+from .models import Category, Equipment, Residence, Room, User
+
+PAGES_WITH_ARGS = [
+    'equipment_add',
+    'equipment_delete',
+    'equipment_update',
+    'equipment',
+    'residence_delete',
+    'residence_update',
+    'residence',
+    'room_add',
+    'room_delete',
+    'room_update',
+    'room',
+]
+
+PAGES_WITHOUT_ARGS = [
+    'about',
+    'homepage',
+    'index',
+    'profile',
+    'profile_update',
+    'register',
+    'residence_add',
+    'search',
+    'signin',
+    'signout',
+    'terms',
+    'user_delete',
+]
 
 
-class TestUrls(SimpleTestCase):
-    def test_homepage_resolves(self):
-        url = reverse('homepage')
-        self.assertEquals(resolve(url).func, homepage)
+class TestResolveUrls(SimpleTestCase):
+    """ Test if the urls answer. """
 
-    def test_residence_resolves(self):
-        url = reverse('residence', args=['1'])
-        self.assertEquals(resolve(url).func, residence)
+    def test_pages_with_args(self):
+        """ Test 11 urls. """
+        for page in PAGES_WITH_ARGS:
+            url = reverse(page, args=['1'])
+            self.assertEquals(resolve(url).func, getattr(views, page))
 
-    def test_residence_add_resolves(self):
-        url = reverse('residence_add')
-        self.assertEquals(resolve(url).func, residence_add)
-
-    def test_room_resolves(self):
-        url = reverse('room', args=['1'])
-        self.assertEquals(resolve(url).func, room)
-
-    def test_equipment_resolves(self):
-        url = reverse('equipment', args=['1'])
-        self.assertEquals(resolve(url).func, equipment)
+    def test_pages_without_args(self):
+        """ Test 12 urls. """
+        for page in PAGES_WITHOUT_ARGS:
+            url = reverse(page)
+            self.assertEquals(resolve(url).func, getattr(views, page))
 
 
 class NotAuthentificationTestCase(TestCase):
-    def test_homepage(self):
+    """ Test pages that do not require authentication. """
+
+    def test_homepage_response(self):
         response = self.client.get('/')
         self.assertEquals(response.status_code, 200)
 
-    def test_about(self):
+    def test_about_response(self):
         response = self.client.get('/about/')
         self.assertEquals(response.status_code, 200)
 
-    def test_signin(self):
+    def test_signin_response(self):
         response = self.client.get('/signin/')
         self.assertEquals(response.status_code, 200)
 
+    def test_register_response(self):
+        response = self.client.get('/register/')
+        self.assertEquals(response.status_code, 200)
 
-class AuthentificationPageTestCase(TestCase):
+    def test_terms_response(self):
+        response = self.client.get('/register/terms/')
+        self.assertEquals(response.status_code, 200)
+
+
+class AuthAndDatabaseTestCase(TestCase):
+    """ Test the operation of the database and pages requiring authentication.
+    """
 
     def setUp(self):
-        url = ('/dashboard/')
-
         self.post = {
             'username': 'UserTest',
             'email': 'usertest@inventarium.fr',
             'password': hash("1234abcd")
         }
 
-        self.response = self.client.post(url, self.post)
         self.user = User.objects.create_user(**self.post)
-
-    def test_access_dashboard(self):
         self.client.login(**self.post)
-        response = self.client.get('/dashboard/')
+        self.residence = Residence.objects.create(name='lorem', user=self.user)
+        self.room = Room.objects.create(name='kitchen',
+                                        residence=self.residence)
+        self.category = Category.objects.create(name='test')
+        self.equipment = Equipment.objects.create(
+            name='tv', category=self.category, room=self.room)
+
+    def test_homepage_response(self):
+        self.client.login(**self.post)
+        response = self.client.get('/homepage/')
         self.assertEquals(response.status_code, 200)
 
-    def test_access_profile(self):
+    def test_profile_response(self):
         self.client.login(**self.post)
         response = self.client.get('/profile/')
         self.assertEquals(response.status_code, 200)
 
-
-class DatabaseResidenceTestCase(TestCase):
-    def setUp(self):
-
-        self.post = {
-            'username': 'UserTest',
-            'email': 'usertest@inventarium.fr',
-            'password': hash("1234abcd")
-        }
-
-        self.user = User.objects.create_user(**self.post)
-
-        Residence.objects.create(
-            name='Lorem',
-            adress='',
-            zip_code='',
-            city='',
-            user=self.user
-        )
-
     def test_residence_name(self):
-        residence = Residence.objects.get(id=1)
+        residence = Residence.objects.get(id=self.residence.id)
         residence_name = f'{residence.name}'
-        self.assertEquals(residence_name, 'Lorem')
+        self.assertEquals(residence_name, 'lorem')
+
+    def test_room_name(self):
+        room = Room.objects.get(id=self.room.id)
+        room_name = f'{room.name}'
+        self.assertEquals(room_name, 'kitchen')
+
+    def test_equipment_name(self):
+        equipment = Equipment.objects.get(id=self.equipment.id)
+        equipment_name = f'{equipment.name}'
+        self.assertEquals(equipment_name, 'tv')
+
+    def test_page_residence_response(self):
+        self.client.login(**self.post)
+        residence = Residence.objects.get(id=self.residence.id)
+        url = reverse('residence', args=[residence.id])
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_page_room_response(self):
+        self.client.login(**self.post)
+        room = Room.objects.get(id=self.room.id)
+        url = reverse('room', args=[room.id])
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_page_equipment_response(self):
+        self.client.login(**self.post)
+        equipment = Equipment.objects.get(id=self.equipment.id)
+        url = reverse('equipment', args=[equipment.id])
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)

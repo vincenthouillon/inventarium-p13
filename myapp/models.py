@@ -2,13 +2,13 @@
 from datetime import datetime
 
 from django.contrib.auth.models import User
-from django.core.validators import RegexValidator, FileExtensionValidator
+from django.core.validators import FileExtensionValidator, RegexValidator
 from django.db import models
 from PIL import Image
 
 
 class Residence(models.Model):
-    """Residence data table."""
+    """ Residence data table. """
     name = models.CharField(
         "nom de la résidence", max_length=45)
     adress = models.CharField("adresse", max_length=80, null=True, blank=True)
@@ -33,7 +33,7 @@ class Residence(models.Model):
 
 
 class Room(models.Model):
-    """Data table of rooms in the house."""
+    """ Data table of rooms in the house. """
     name = models.CharField(
         "Nom de la pièce", max_length=80)
     picture = models.ImageField(
@@ -48,7 +48,7 @@ class Room(models.Model):
     class Meta:
         verbose_name = "pièce"
 
-    def save(self):
+    def save(self, **kwargs):
         super().save()
 
         if self.picture:
@@ -60,10 +60,10 @@ class Room(models.Model):
 
 
 class Category(models.Model):
-    """Category data table."""
+    """ Category data table. """
     name = models.CharField("catégorie", max_length=25, unique=True)
 
-    def __str__(self):
+    def __str__(self, **kwargs):
         return self.name
 
     class Meta:
@@ -71,7 +71,10 @@ class Category(models.Model):
 
 
 class Equipment(models.Model):
-    """Data table of the equipment of the house."""
+    """
+    Data table of the equipment of the house with automatic resizing of the
+    images and restriction of the extension of the files to .pdf.
+    """
     name = models.CharField("nom de l'équipement", max_length=80)
     brand = models.CharField("marque", max_length=30, null=True, blank=True)
     model = models.CharField("modèle", max_length=40, null=True, blank=True)
@@ -114,7 +117,7 @@ class Equipment(models.Model):
     class Meta:
         verbose_name = 'équipement'
 
-    def save(self):
+    def save(self, **kwargs):
         super().save()
 
         if self.picture:

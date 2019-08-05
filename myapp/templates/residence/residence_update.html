@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends '_layouts/base.html' %}
 {% load crispy_forms_tags %}
 {% block head_title %}Mise à jour d'une pièce{% endblock %}
 {% block content %}
@@ -11,7 +11,7 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-2">Mise à jour de la résidence</legend>
                 {{ u_form | crispy}}
-                <a href="{% url 'dashboard' %}" class="btn btn-secondary">Annuler</a>
+                <a href="{% url 'homepage' %}" class="btn btn-secondary">Annuler</a>
                 <button type="button" class="btn btn-primo" data-toggle="modal" data-target="#confirmationModal">
                     Mettre à jour</button>
             </fieldset>

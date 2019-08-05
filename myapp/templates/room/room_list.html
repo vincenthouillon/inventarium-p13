@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends '_layouts/base.html' %}
 {% load static %}
 {% load render_table from django_tables2 %}
 {% load querystring from django_tables2 %}
@@ -10,7 +10,7 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Acceuil</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'homepage' %}">Acceuil</a></li>
                 <li class="breadcrumb-item"><a
                         href="{% url 'residence' room.residence.id %}">{{ room.residence.name|capfirst }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ room.name|capfirst }}</li>

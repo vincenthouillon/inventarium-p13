@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends '_layouts/base.html' %}
 {% load crispy_forms_tags %}
 {% block head_title %}S'identifier{% endblock %}
 {% block content %}
@@ -21,7 +21,7 @@
             </div>
             <div class="border-top">              
                 <small class='text-muted ml-2'>
-                    <a href="{% url 'homepage' %}">Mot de passe oublié ?</a>
+                    <a href="{% url 'index' %}">Mot de passe oublié ?</a>
                 </small>
             </div>
         </form>

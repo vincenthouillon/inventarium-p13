@@ -4,7 +4,7 @@ from .models import Equipment
 
 
 class TruncatedTextColumn(tables.Column):
-    '''A Column to limit to 100 characters and add an ellipsis'''
+    """A Column to limit to 100 characters and add an ellipsis."""
     def render(self, value):
         if len(value) > 102:
             return value[0:99] + '...'
