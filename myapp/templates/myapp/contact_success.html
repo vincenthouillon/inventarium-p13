@@ -1,0 +1,18 @@
+{% extends 'myapp/_layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}Message envoyé{% endblock %}
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Confirmation</h1>
+        <p>Votre message a bien été envoyé.</p>
+        {% if user.is_authenticated %}
+            <a class="btn btn-primo" href="{% url 'homepage' %}">Retour</a>
+        {% else %}
+            <a class="btn btn-primo" href="{% url 'index' %}">Retour</a>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock content %}

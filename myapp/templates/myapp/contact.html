@@ -1,0 +1,21 @@
+{% extends 'myapp/_layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}Contact{% endblock %}
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        
+        <form method="post" class="col-lg-6 col-sm-12">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                    <legend class="border-bottom mb-2">Envoyer un message.</legend>
+            {{ form | crispy }}
+            <div class="form-actions">
+                <button class="btn btn-outline-primo" type="submit">Envoyer</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

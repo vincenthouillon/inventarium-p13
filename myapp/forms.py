@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 from .models import Equipment, Room, Residence
 
 
-class UserRegisterForm(UserCreationForm):
+class UserSignupForm(UserCreationForm):
     """Form used to register a user."""
     email = forms.EmailField(
-        label="Adresse électronique",
+        label="Courriel",
         max_length=255,
         required=True)
 
@@ -27,12 +27,18 @@ class UserRegisterForm(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(
-        label="Adresse électronique",
+        label="Courriel",
         max_length=255)
 
     class Meta:
         model = User
         fields = ('username', 'last_name', 'first_name', 'email')
+
+
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(label='Courriel', required=True)
+    subject = forms.CharField(label='Sujet', required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)
 
 
 class EquipmentForm(forms.ModelForm):

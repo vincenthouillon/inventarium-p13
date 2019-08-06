@@ -1,3 +1,4 @@
+# https://django-tables2.readthedocs.io/en/latest/
 import django_tables2 as tables
 
 from .models import Equipment

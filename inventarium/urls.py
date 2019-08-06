@@ -24,14 +24,17 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('register/', views.register, name='register'),
-    path('register/terms/', views.terms, name='terms'),
+    path('signup/', views.signup, name='signup'),
+    path('signup/terms/', views.terms, name='terms'),
     path('signin/', views.signin, name='signin'),
     path('signout/', views.signout, name='signout'),
-    path('profile/', views.profile, name='profile'),
-    path('profile/update', views.profile_update, name='profile_update'),
-    path('profile/delete', views.user_delete, name='user_delete'),
+    path('account/', views.account, name='account'),
+    path('account/update/', views.account_update, name='account_update'),
+    path('account/delete/', views.user_delete, name='user_delete'),
     path('about/', views.about, name='about'),
+    # ############################# CONTACT_FORM #############################
+    path('email/', views.email, name='email'),
+    path('email-success/', views.email_success, name='email_success'),
     # ############################ PASSWORD_RESET ############################
     path('password-reset/', auth_views.PasswordResetView.as_view(
         template_name='myapp/pwd_reset/password_reset.html'),
@@ -47,7 +50,7 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(
              template_name='myapp/pwd_reset/password_reset_complete.html'),
          name='password_reset_complete'),
-
+    # ############################## RESIDENCE ##############################
     path('homepage/', views.homepage, name='homepage'),
     path('homepage/residence_add', views.residence_add, name='residence_add'),
     path('residence/<int:residence_id>', views.residence, name='residence'),
@@ -55,7 +58,7 @@ urlpatterns = [
          views.residence_update, name='residence_update'),
     path('residence/<int:residence_id>/delete', views.residence_delete,
          name='residence_delete'),
-
+    # ################################# ROOM #################################
     path('room/<int:room_id>/', views.room, name='room'),
     path('room/<int:room_id>/list', views.room_list, name='room_list'),
     path('room/<int:residence_id>/add', views.room_add, name='room_add'),
@@ -63,7 +66,7 @@ urlpatterns = [
     path('room/<int:room_id>/delete', views.room_delete, name='room_delete'),
     path('room/<int:room_id>/<record>/', views.room_equipment,
          name='room_equipment'),
-
+    # ############################## EQUIPMENT ##############################
     path('equipment/<int:equipment_id>/', views.equipment, name='equipment'),
     path('equipment/<int:room_id>/add/', views.equipment_add,
          name='equipment_add'),

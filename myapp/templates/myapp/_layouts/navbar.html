@@ -11,7 +11,6 @@
                     id="searchForm">
                 <button class="btn btn-primo btn-search" type="submit"><i class="fas fa-search"></i></button>
             </div>
-
         </form>
 
         {% else %}
@@ -26,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="{% url 'email' %}">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">A propos</a>
@@ -36,7 +35,7 @@
                     <a class="btn btn-outline-primo dropdown-toggle" id="navbarDropdown" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" href="#">{{ user.username }}</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'profile' %}">Mon compte</a>
+                        <a class="dropdown-item" href="{% url 'account' %}">Mon compte</a>
                         <a class="dropdown-item" href="{% url 'homepage' %}">Mon tableau de bord</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'signout' %}"><i class="fas fa-sign-out-alt"></i> Se
