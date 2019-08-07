@@ -13,6 +13,7 @@ class TruncatedTextColumn(tables.Column):
 
 
 class EquipmentTable(tables.Table):
+    """Define au custom Table class."""
     name = tables.Column(verbose_name="Equipement", attrs={
                          'td': {'class': 'text-capitalize'}})
     brand = tables.Column()

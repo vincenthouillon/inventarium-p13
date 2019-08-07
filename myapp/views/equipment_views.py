@@ -58,7 +58,6 @@ def equipment_update(request, equipment_id):
             'form': u_form,
             'equipment': get_equipment,
         })
-
     else:
         raise Http404()
 

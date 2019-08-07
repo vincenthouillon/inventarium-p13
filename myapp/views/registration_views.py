@@ -1,14 +1,20 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.core.mail import BadHeaderError, send_mail
-from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import BadHeaderError, EmailMessage, send_mail
 from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from ..forms import ContactForm, CustomUserCreationForm, CustomUserChangeForm
 from inventarium.settings import EMAIL_HOST_USER
+
+from ..forms import ContactForm, CustomUserChangeForm, CustomUserCreationForm
+from ..tokens import account_activation_token
 
 
 def index(request):
@@ -24,16 +30,28 @@ def about(request):
 
 
 def signup(request):
-    """User registration page."""
+    """User registration with confirmation email."""
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect(reverse('homepage'))
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = account_activation_token.make_token(user.pk)
+            email_context = {"token": token,
+                             "uid": uid,
+                             "domain": get_current_site(request).domain}
+            mail = EmailMessage(
+                "Inventarium: Confirmation de l'inscription",
+                render_to_string("myapp/user/activate_account.html",
+                    context=email_context),
+                EMAIL_HOST_USER,
+                [user.email]
+                )
+            mail.content_subtype = "html"
+            mail.send()
+            return render(request, "myapp/user/signup_email.html")
     else:
         form = CustomUserCreationForm()
 
@@ -43,6 +61,26 @@ def signup(request):
         'title': "S'enregister"
     }
     return render(request, template_name, context)
+
+
+def activate_account(request, uid, token):
+    """Manage view for link account activation."""
+    User = get_user_model()
+
+    try:
+        user_id = urlsafe_base64_decode(uid).decode()
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        context = {"is_valid_data": False}
+    else:
+        if account_activation_token.check_token(user.id, token):
+            user.is_active = True
+            user.save()
+            login(request, user)
+            context = {"is_valid_data": True}
+        else:
+            context = {"is_valid_data": False}
+    return render(request, "myapp/user/signup_validation.html", context)
 
 
 def terms(request):
@@ -107,7 +145,29 @@ def account_update(request):
     else:
         u_form = CustomUserChangeForm(instance=request.user)
 
-    return render(request, 'myapp/user/account_update.html', {'u_form': u_form})
+    return render(request, 'myapp/user/account_update.html',
+                  {'u_form': u_form})
+
+
+def change_password(request):
+    from django.contrib.auth.forms import PasswordChangeForm
+    from django.contrib.auth import update_session_auth_hash
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(
+                request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'myapp/user/change_password.html', {
+        'form': form
+    })
 
 
 @login_required

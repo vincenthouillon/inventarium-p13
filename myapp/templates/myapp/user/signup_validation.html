@@ -1,0 +1,24 @@
+{% extends 'myapp/_layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}Activation{% endblock %}
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-10">
+          {% if is_valid_data == True %}
+            <h1 class="section-title">C'est tout bon</h1>
+            <p>Votre compte est à présent actif !</p>
+            <a  class="btn btn-outline-primo" href="{% url 'homepage' %}">Entrer dans Inventarium.</a>
+          {% else %}
+            <h1 class="section-title">Oups...</h1>
+            <p>Le lien n'est malheuresement plus fonctionnel et votre compte n'a pas pu été activé.</p>
+            <p class="text-muted">Veuillez utiliser le formulaire de contact du site en cas de problème.</p>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+</section>
+
+{% endblock %}

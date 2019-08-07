@@ -1,0 +1,18 @@
+{% autoescape off %}
+<header>
+    <h4>Bonjour,</h4>
+</header>
+
+<body>
+    <p>Vous venez de vous inscrire sur inventarium et nous vous en remercions !</p>
+    <p>Voici le lien pour activer votre compte :</p>
+    <a href="http://{{ domain }}{% url 'activate_account' uid=uid token=token %}">
+        http://{{ domain }}{% url 'activate_account' uid=uid token=token %}</a>            
+</body>
+
+<footer>
+    <p>Vous ne pouvez pas répondre à ce mail pour nous contacter.
+       Veuillez utiliser le formulaire de contact.
+    </p> 
+</footer>
+{% endautoescape %}
