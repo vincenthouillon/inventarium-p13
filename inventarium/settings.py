@@ -133,6 +133,8 @@ USE_THOUSAND_SEPARATOR = True
 # Set defaut template pack
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+AUTH_USER_MODEL = 'myapp.CustomUser'
+
 
 # Email configuration (password_reset & Contact form)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

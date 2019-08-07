@@ -18,9 +18,11 @@
             <div class="col-10">
                 <h1 class="section-title">{{ room|capfirst }}</h1>
             </div>
+            {% if equipments %}
             <div class="col-2 text-right mt-4">
                 <a href="{% url 'room_list' room.id%}" style="font-size: 25px;"><i class="fas fa-table"></i></a>
             </div>
+            {% endif %}
         </div>
         {% if equipments %}
         <div class="card-deck">

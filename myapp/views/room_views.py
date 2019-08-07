@@ -114,6 +114,7 @@ def room_update(request, room_id):
     else:
         raise Http404()
 
+
 @login_required
 def room_equipment(request, room_id, record):
     """When you click on a line in the equipment table,

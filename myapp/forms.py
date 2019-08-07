@@ -1,42 +1,36 @@
 from django import forms
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import Equipment, Room, Residence
+from .models import Equipment, Room, Residence, CustomUser
 
 
-class UserSignupForm(UserCreationForm):
+class CustomUserCreationForm(UserCreationForm):
     """Form used to register a user."""
-    email = forms.EmailField(
-        label="Courriel",
-        max_length=255,
-        required=True)
 
     terms = forms.BooleanField(
         error_messages={
             'required': 'Vous devez accepter les conditions d\'utilisation'},
-        label="J'accepte les <a href='./terms/' target='_blank'> conditions d\'utilisation.</a>"
+        label="J'accepte les <a href='./terms/' target='_blank'> conditions \
+            d\'utilisation.</a>"
     )
 
     class Meta:
-        model = User
-        fields = ('username', 'last_name', 'first_name',
-                  'email', 'password1', 'password2', 'terms')
+        model = CustomUser
+        fields = ('email', 'last_name', 'first_name',
+                  'password1', 'password2', 'terms', )
 
 
-class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField(
-        label="Courriel",
-        max_length=255)
+class CustomUserChangeForm(UserChangeForm):
+    """Form used to update account a user."""
 
     class Meta:
-        model = User
-        fields = ('username', 'last_name', 'first_name', 'email')
+        model = CustomUser
+        fields = ('last_name', 'first_name', 'email', )
 
 
 class ContactForm(forms.Form):
-    from_email = forms.EmailField(label='Courriel', required=True)
+    from_email = forms.EmailField(label='Adresse électronique', required=True)
     subject = forms.CharField(label='Sujet', required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)
 

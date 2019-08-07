@@ -3,7 +3,7 @@ from django.urls import resolve, reverse
 
 import myapp.views as views
 
-from .models import Category, Equipment, Residence, Room, User
+from .models import Category, Equipment, Residence, Room, CustomUser
 
 PAGES_WITH_ARGS = [
     'equipment_add',
@@ -23,9 +23,9 @@ PAGES_WITHOUT_ARGS = [
     'about',
     'homepage',
     'index',
-    'profile',
-    'profile_update',
-    'register',
+    'account',
+    'account_update',
+    'signup',
     'residence_add',
     'search',
     'signin',
@@ -36,23 +36,23 @@ PAGES_WITHOUT_ARGS = [
 
 
 class TestResolveUrls(SimpleTestCase):
-    """ Test if the urls answer. """
+    """Test if the urls answer."""
 
     def test_pages_with_args(self):
-        """ Test 11 urls. """
+        """Test 11 urls."""
         for page in PAGES_WITH_ARGS:
             url = reverse(page, args=['1'])
             self.assertEquals(resolve(url).func, getattr(views, page))
 
     def test_pages_without_args(self):
-        """ Test 12 urls. """
+        """Test 12 urls."""
         for page in PAGES_WITHOUT_ARGS:
             url = reverse(page)
             self.assertEquals(resolve(url).func, getattr(views, page))
 
 
 class NotAuthentificationTestCase(TestCase):
-    """ Test pages that do not require authentication. """
+    """Test pages that do not require authentication."""
 
     def test_homepage_response(self):
         response = self.client.get('/')
@@ -66,27 +66,27 @@ class NotAuthentificationTestCase(TestCase):
         response = self.client.get('/signin/')
         self.assertEquals(response.status_code, 200)
 
-    def test_register_response(self):
-        response = self.client.get('/register/')
+    def test_signup_response(self):
+        response = self.client.get('/signup/')
         self.assertEquals(response.status_code, 200)
 
     def test_terms_response(self):
-        response = self.client.get('/register/terms/')
+        response = self.client.get('/signup/terms/')
         self.assertEquals(response.status_code, 200)
 
 
 class AuthAndDatabaseTestCase(TestCase):
-    """ Test the operation of the database and pages requiring authentication.
+    """
+    Test the operation of the database and pages requiring authentication.
     """
 
     def setUp(self):
         self.post = {
-            'username': 'UserTest',
             'email': 'usertest@inventarium.fr',
             'password': hash("1234abcd")
         }
 
-        self.user = User.objects.create_user(**self.post)
+        self.user = CustomUser.objects.create_user(**self.post)
         self.client.login(**self.post)
         self.residence = Residence.objects.create(name='lorem', user=self.user)
         self.room = Room.objects.create(name='kitchen',
@@ -100,9 +100,9 @@ class AuthAndDatabaseTestCase(TestCase):
         response = self.client.get('/homepage/')
         self.assertEquals(response.status_code, 200)
 
-    def test_profile_response(self):
+    def test_account_response(self):
         self.client.login(**self.post)
-        response = self.client.get('/profile/')
+        response = self.client.get('/account/')
         self.assertEquals(response.status_code, 200)
 
     def test_residence_name(self):

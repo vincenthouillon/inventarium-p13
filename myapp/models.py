@@ -1,10 +1,38 @@
 # https://docs.djangoproject.com/fr/2.2/topics/db/models/
 from datetime import datetime
 
-from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator, RegexValidator
 from django.db import models
 from PIL import Image
+
+
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+from django.conf import settings
+
+from .managers import CustomUserManager
+
+
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_('email address'), unique=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    last_name = models.CharField('nom', max_length=150, blank=True)
+    first_name = models.CharField('prénom', max_length=150, blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = 'utilisateur'
 
 
 class Residence(models.Model):
@@ -22,8 +50,12 @@ class Residence(models.Model):
                                 blank=True)
     city = models.CharField("ville", max_length=45, null=True, blank=True)
 
+    # user = models.ForeignKey(
+    #     User, on_delete=models.CASCADE, verbose_name="utilisateur")
+
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name="utilisateur")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        verbose_name="utilisateur")
 
     def __str__(self):
         return self.name

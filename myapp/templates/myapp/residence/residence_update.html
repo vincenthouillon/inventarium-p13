@@ -10,7 +10,7 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-2">Mise à jour de la résidence</legend>
-                {{ u_form | crispy}}
+                {{ u_form|crispy}}
                 <a href="{% url 'homepage' %}" class="btn btn-secondary">Annuler</a>
                 <button type="button" class="btn btn-primo" data-toggle="modal" data-target="#confirmationModal">
                     Mettre à jour</button>

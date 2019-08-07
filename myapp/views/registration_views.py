@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.http import HttpResponse
 
-from ..forms import ContactForm, UserSignupForm, UserUpdateForm
+from ..forms import ContactForm, CustomUserCreationForm, CustomUserChangeForm
 from inventarium.settings import EMAIL_HOST_USER
 
 
@@ -26,7 +26,7 @@ def about(request):
 def signup(request):
     """User registration page."""
     if request.method == 'POST':
-        form = UserSignupForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -35,7 +35,7 @@ def signup(request):
             login(request, user)
             return redirect(reverse('homepage'))
     else:
-        form = UserSignupForm()
+        form = CustomUserCreationForm()
 
     template_name = 'myapp/signup.html'
     context = {
@@ -56,21 +56,23 @@ def signin(request):
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
+            user = authenticate(email=email, password=password)
             if user is not None:
-                login(request, user)
+                login(request,
+                      user,
+                      backend='django.contrib.auth.backends.ModelBackend')
                 messages.info(
-                    request, "Vous êtes connecté {}".format(username))
+                    request, "Vous êtes connecté {}".format(email))
                 return redirect('homepage')
             else:
                 messages.error(
-                    request, "Nom d'utilisateur ou mot de passe invalide.",
+                    request, "Email ou mot de passe invalide.",
                     "danger")
         else:
             messages.error(
-                request, "Nom d'utilisateur ou mot de passe invalide.",
+                request, "Email ou mot de passe invalide.",
                 "danger")
 
     form = AuthenticationForm()
@@ -89,7 +91,7 @@ def signout(request):
 
 @login_required
 def account(request):
-    """Display the user profile page."""
+    """Display the user account page."""
     return render(request, 'myapp/account.html', {'user': request.user})
 
 
@@ -97,13 +99,13 @@ def account(request):
 def account_update(request):
     """Update account."""
     if request.method == "POST":
-        u_form = UserUpdateForm(request.POST, instance=request.user)
+        u_form = CustomUserChangeForm(request.POST, instance=request.user)
         if u_form.is_valid():
             u_form.save()
             messages.success(request, f'Votre compte a bien été mis à jour.')
-            return redirect('profile')
+            return redirect('account')
     else:
-        u_form = UserUpdateForm(instance=request.user)
+        u_form = CustomUserChangeForm(instance=request.user)
 
     return render(request, 'myapp/account_update.html', {'u_form': u_form})
 
