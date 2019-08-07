@@ -33,7 +33,7 @@ urlpatterns = [
     path('account/delete/', views.user_delete, name='user_delete'),
     path('about/', views.about, name='about'),
 
-    # ########################### ACCOUNT_ACTIVATION ###########################
+    # ########################## ACCOUNT_ACTIVATION ##########################
     path("activate/<str:uid>/<str:token>",
          views.activate_account, name="activate_account"),
 
@@ -77,7 +77,7 @@ urlpatterns = [
     path('room/<int:room_id>/delete', views.room_delete, name='room_delete'),
     path('room/<int:room_id>/<record>/', views.room_equipment,
          name='room_equipment'),
-         
+
     # ############################## EQUIPMENT ##############################
     path('equipment/<int:equipment_id>/', views.equipment, name='equipment'),
     path('equipment/<int:room_id>/add/', views.equipment_add,

@@ -21,15 +21,21 @@ PAGES_WITH_ARGS = [
 
 PAGES_WITHOUT_ARGS = [
     'about',
+    'account_update',
+    'account',
+    'email_success',
+    'email',
     'homepage',
     'index',
-    'account',
-    'account_update',
-    'signup',
+    'password_reset_done',
+    'password_reset',
+    'passwword_reset_complete',
+    'passwword_reset_confirm',
     'residence_add',
     'search',
     'signin',
     'signout',
+    'signup',
     'terms',
     'user_delete',
 ]
@@ -45,7 +51,7 @@ class TestResolveUrls(SimpleTestCase):
             self.assertEquals(resolve(url).func, getattr(views, page))
 
     def test_pages_without_args(self):
-        """Test 12 urls."""
+        """Test 18 urls."""
         for page in PAGES_WITHOUT_ARGS:
             url = reverse(page)
             self.assertEquals(resolve(url).func, getattr(views, page))
