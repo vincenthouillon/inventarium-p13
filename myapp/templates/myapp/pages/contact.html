@@ -12,6 +12,11 @@
                     <legend class="border-bottom mb-2">Envoyer un message.</legend>
             {{ form|crispy }}
             <div class="form-actions">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'homepage' %}" class="btn btn-outline-secondary">Annuler</a>
+                {% else %}
+                    <a href="{% url 'index' %}" class="btn btn-outline-secondary">Annuler</a>
+                {% endif %}
                 <button class="btn btn-outline-primo" type="submit">Envoyer</button>
             </div>
         </form>

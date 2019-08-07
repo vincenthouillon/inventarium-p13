@@ -13,13 +13,13 @@ from inventarium.settings import EMAIL_HOST_USER
 
 def index(request):
     """View the home page."""
-    template_name = 'myapp/index.html'
+    template_name = 'myapp/pages/index.html'
     return render(request, template_name)
 
 
 def about(request):
     """Display about page."""
-    template_name = 'myapp/about.html'
+    template_name = 'myapp/pages/about.html'
     return render(request, template_name)
 
 
@@ -37,7 +37,7 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
 
-    template_name = 'myapp/signup.html'
+    template_name = 'myapp/user/signup.html'
     context = {
         'form': form,
         'title': "S'enregister"
@@ -47,7 +47,7 @@ def signup(request):
 
 def terms(request):
     """Display about page."""
-    template_name = 'myapp/terms.html'
+    template_name = 'myapp/pages/terms.html'
     return render(request, template_name)
 
 
@@ -78,7 +78,7 @@ def signin(request):
     form = AuthenticationForm()
 
     return render(request=request,
-                  template_name="myapp/signin.html",
+                  template_name="myapp/user/signin.html",
                   context={"form": form})
 
 
@@ -92,7 +92,7 @@ def signout(request):
 @login_required
 def account(request):
     """Display the user account page."""
-    return render(request, 'myapp/account.html', {'user': request.user})
+    return render(request, 'myapp/user/account.html', {'user': request.user})
 
 
 @login_required
@@ -107,7 +107,7 @@ def account_update(request):
     else:
         u_form = CustomUserChangeForm(instance=request.user)
 
-    return render(request, 'myapp/account_update.html', {'u_form': u_form})
+    return render(request, 'myapp/user/account_update.html', {'u_form': u_form})
 
 
 @login_required
@@ -138,10 +138,10 @@ def email(request):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('email_success')
-    return render(request, 'myapp/contact.html', {'form': form})
+    return render(request, 'myapp/pages/contact.html', {'form': form})
 
 
 def email_success(request):
     """Contact form email success"""
 
-    return render(request, 'myapp/contact_success.html')
+    return render(request, 'myapp/pages/contact_success.html')
