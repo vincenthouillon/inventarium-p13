@@ -1,7 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import (authenticate, get_user_model, login, logout,
+                                 update_session_auth_hash)
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import BadHeaderError, EmailMessage, send_mail
 from django.http import HttpResponse
@@ -149,10 +150,9 @@ def account_update(request):
                   {'u_form': u_form})
 
 
+@login_required
 def change_password(request):
-    from django.contrib.auth.forms import PasswordChangeForm
-    from django.contrib.auth import update_session_auth_hash
-
+    """Change password view."""
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
