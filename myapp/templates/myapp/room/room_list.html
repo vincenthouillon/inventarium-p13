@@ -10,7 +10,7 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'homepage' %}">Acceuil</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'homepage' %}"><i class="fas fa-home"></i></a></li>
                 <li class="breadcrumb-item"><a
                         href="{% url 'residence' room.residence.id %}">{{ room.residence.name|capfirst }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ room.name|capfirst }}</li>
@@ -27,7 +27,8 @@
         <div class="table-responsive">
             {% render_table equipments %}
         </div>
-        <a class="btn btn-success btn-sm" href="{% querystring '_export'='xls' %}"><i class="fas fa-file-excel"></i> Download</a>
+        <a class="btn btn-success btn-sm" href="{% querystring '_export'='xls' %}"><i class="fas fa-file-excel"></i>
+            Download</a>
     </div>
 </section>
 

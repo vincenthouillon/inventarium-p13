@@ -4,30 +4,29 @@
 <div class="section">
     <div class="container">
         <h1 class="section-title">Mon compte</h1>
-        <table class="table col-lg-6 col-sm-12">
+        <table class="table-responsive col-lg-6 col-sm-12 mb-4">
             <tr>
-                <td>Nom :</td>
+                <td class="small font-weight-bold">Nom :</td>
                 <td>{{ user.last_name }}</td>
             </tr>
             <tr>
-                <td>Prénom :</td>
+                <td class="small font-weight-bold">Prénom :</td>
                 <td>{{ user.first_name }}</td>
             </tr>
             <tr>
-                <td>Adresse électronique :</td>
+                <td class="small font-weight-bold">Adresse électronique :&nbsp;</td>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <td>Date d'inscription :</td>
+                <td class="small font-weight-bold">Date d'inscription :</td>
                 <td>{{ user.date_joined }}</td>
             </tr>
             <tr>
-                <td>Dernière connexion :</td>
+                <td class="small font-weight-bold">Dernière connexion :</td>
                 <td>{{ user.last_login }}</td>
             </tr>
         </table>
-        <div class="sign-in">
-        </div>
+
         <form method="post" action="{% url 'user_delete' %}">
             <a href="{% url 'account_update' %}" class="btn btn-primo">
                 Modifier</a>

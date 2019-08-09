@@ -22,7 +22,7 @@ def equipment(request, equipment_id):
     if get_equipment.room.residence in Residence.objects.filter(
             user=request.user):
         equipments = get_object_or_404(Equipment, id=get_equipment.id)
-        
+
         info = information(str(equipments.date_purchase),
                            str(equipments.price),
                            str(equipments.length_warranty),

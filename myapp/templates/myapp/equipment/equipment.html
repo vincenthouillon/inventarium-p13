@@ -8,7 +8,7 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'homepage' %}">Acceuil</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'homepage' %}"><i class="fas fa-home"></i></a></li>
                 <li class="breadcrumb-item"><a
                         href="{% url 'residence' equipment.room.residence.id %}">{{ equipment.room.residence.name|capfirst }}</a>
                 </li>
@@ -36,38 +36,38 @@
                         style="width: {{ lifetime }}%; background-color: #ed4d71" ; aria-valuenow="{{ lifetime }}"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <p class="text-muted small text-right my-0">Niveau de vie théorique</p>
+                    <p class="text-muted small text-right my-0">Durée de vie théorique</p>
                 <table class="table-sm mx-2">
                     <tr>
-                        <td class="small font-weight-bold text-right">Marque :</td>
+                        <td class="small font-weight-bold text-right">Marque:</td>
                         <td>{{ equipment.brand }}</td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold text-right">Modèle :</td>
+                        <td class="small font-weight-bold text-right">Modèle:</td>
                         <td>{{ equipment.model }}</td>
                     </tr>
                     <tr>
                         <td class="small font-weight-bold text-right align-top pt-2">Prix TTC :</td>
                         <td>{{ equipment.price }} €
-                        <p class="text-muted small">Valeur résiduelle estimée : ~{{ wear_rate }} €</p>
+                        <p class="text-muted small">Valeur résiduelle estimée: ~{{ wear_rate }} €</p>
                         </td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold text-right">Date d'achat :</td>
+                        <td class="small font-weight-bold text-right">Date d'achat:</td>
                         <td>{{ equipment.date_purchase }}</td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold text-right align-top pt-2">Garantie :</td>
+                        <td class="small font-weight-bold text-right align-top pt-2">Garantie:</td>
                         <td class="text-{{ state_warranty }}">{{ equipment.length_warranty }} mois
                         <p class="text-muted small my-0">Date de fin de garantie : {{ end_warranty }}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold text-right">Categorie :</td>
+                        <td class="small font-weight-bold text-right">Catégorie:</td>
                         <td>{{ equipment.category }}</td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold text-right">Note :
+                        <td class="small font-weight-bold text-right align-top pt-2">Note:
                         <td>{{ equipment.note }}</td>
                         </td>
                     </tr>
