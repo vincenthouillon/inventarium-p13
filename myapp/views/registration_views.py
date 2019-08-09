@@ -44,12 +44,12 @@ def signup(request):
                              "uid": uid,
                              "domain": get_current_site(request).domain}
             mail = EmailMessage(
-                "Inventarium: Confirmation de l'inscription",
-                render_to_string("myapp/user/activate_account.html",
-                    context=email_context),
-                EMAIL_HOST_USER,
-                [user.email]
-                )
+                subject="Inventarium: Confirmation de l'inscription",
+                body=render_to_string("myapp/user/activate_account.html",
+                                      context=email_context),
+                from_email='admin@inventarium.me',
+                to=[user.email]
+            )
             mail.content_subtype = "html"
             mail.send()
             return render(request, "myapp/user/signup_email.html")
@@ -194,7 +194,7 @@ def email(request):
                         form.cleaned_data['subject'],
                         form.cleaned_data['message'])
             try:
-                send_mail(subject, message, from_email, [EMAIL_HOST_USER])
+                send_mail(subject, message, from_email,['EMAIL_HOST_USER'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('email_success')

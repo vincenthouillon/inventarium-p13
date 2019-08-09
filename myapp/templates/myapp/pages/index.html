@@ -10,25 +10,26 @@
             <div class="col-md-5">
                 <h2 class="section-title">Inscrivez-vous !</h2>
                 <p>
-                    <i class="fas fa-quote-left"></i>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem numquam maiores veniam, quis,
-                    ipsum
-                    sapiente atque consectetur, incidunt doloribus est eaque. Perspiciatis reiciendis, aperiam
-                    pariatur possimus saepe dolore libero quo.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem numquam maiores veniam, quis,
-                    ipsum
-                    sapiente atque consectetur, incidunt doloribus est eaque. Perspiciatis reiciendis, aperiam
-                    pariatur possimus saepe dolore libero quo.
-                    <i class="fas fa-quote-right"></i>
+                    <i class="fas fa-quote-left"></i><br>
+                    Ce service vous permet de rassembler l'ensemble de vos factures d'équipements
+                    présents dans vos habitations, afin de les retrouver facilement et ce depuis n'importe où.
+                </p>
+                <p>
+                    Inventarium vous donne également quelques indications en plus sur vos équipement
+                    comme leur durée de vie théorique, l'estimation de leur valeur résiduelle*.
+                    <p class="text-muted small font-italic">
+                        * La valeur résiduelle est égale à la valeur à neuf à laquelle est appliqué un coefficient de
+                        vétusté.".
+                    </p>
+                    <br><i class="fas fa-quote-right"></i>
                 </p>
 
                 {% if user.is_authenticated %}
                 <a class="btn btn-primo" href="{% url 'account' %}"><i class="fas fa-user-plus"></i>
                     S'inscrire</a>
                 {% else %}
-                    <a class="btn btn-primo" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i>
-                        S'inscrire</a>
+                <a class="btn btn-primo" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i>
+                    S'inscrire</a>
                 {% endif %}
 
             </div>
@@ -43,29 +44,34 @@
 <!-- SECTION EXPLAIN-->
 <section class="explain">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-xl-4 col-md-6">
-                <h2>Lorem Ipsum</h2>
-                <img src="{% static 'img/screenshot_signup.png' %}" alt="screenshot">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente laboriosam accusantium
-                    consequuntur quia
-                    labore porro maiores a amet!</p>
+        <div class="row">
+            <div class="col-lg-4">
+                <h3 class="section-subtitle">Etape 1 : Inscrivez-vous</h3>
+                <img src="{% static 'img/signup.png' %}" alt="screenshot">
+                <ul class="pl-4" style="list-style-type:square">
+                    <li>Remplissez le formulaire d'inscription.</li>
+                    <li>Validez votre compte.</li>
+                    <li>Connectez-vous.</li>
+                </ul>
             </div>
 
-            <div class="col-xl-4 col-md-6">
-                <h2>Lorem Ipsum</h2>
-                <img src="{% static 'img/screenshot_signup.png' %}" alt="screenshot">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente laboriosam accusantium
-                    consequuntur quia
-                    labore porro maiores a amet!</p>
+            <div class="col-lg-4">
+                <h3 class="section-subtitle">Etape 2 : Configurez</h3>
+                <img src="{% static 'img/residence.png' %}" alt="screenshot">
+                <ul class="pl-4" style="list-style-type:square">
+                    <li>Ajoutez votre ou vos résidences.</li>
+                    <li>Ajoutez les pièces de vos résidences.</li>
+                    <li>Puis ajoutez vos équipements.</li>
+                </ul>
             </div>
 
-            <div class="col-xl-4 col-md-12">
-                <h2>Lorem Ipsum</h2>
-                <img src="{% static 'img/screenshot_signup.png' %}" alt="screenshot">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente laboriosam accusantium
-                    consequuntur quia
-                    labore porro maiores a amet!</p>
+            <div class="col-lg-4">
+                <h3 class="section-subtitle">Etape 3 : Consultez</h3>
+                <img src="{% static 'img/equipment.png' %}" alt="screenshot">
+                <ul class="pl-4" style="list-style-type:square">
+                    <li>Retrouvez et consultez facilement le détail de vos équipements.</li>
+                    <li>Vous pouvez même exporter la liste de vos équipements au format Excel.</li>
+                </ul>
             </div>
         </div>
     </div>

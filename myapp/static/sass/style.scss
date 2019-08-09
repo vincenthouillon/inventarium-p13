@@ -197,8 +197,9 @@ tbody {
 /* ---------------- STEPS ---------------- */
 .explain {
     position: relative;
+    background: #f8f9fa;
     height: 100%;
-    padding: 40px 0 60px 0;
+    padding: 20px 10px 60px 10px;
     &::before {
         content: "";
         position: absolute;
@@ -207,12 +208,12 @@ tbody {
         transform: translate(-50%);
         width: 400px;
         height: 1px;
-        background-color: #dedede;
+        background-color: $primary-color;
     }
 }
 
 .explain img {
-    width: 330px;
+    width: 320px;
     margin: 10px 0;
     border-radius: 2px;
     border: 1px solid $text-color;
