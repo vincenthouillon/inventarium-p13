@@ -1,16 +1,13 @@
 # https://docs.djangoproject.com/fr/2.2/topics/db/models/
 from datetime import datetime
 
+from django.conf import settings
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import FileExtensionValidator, RegexValidator
 from django.db import models
-from PIL import Image
-
-
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
-from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+from PIL import Image
 
 from .managers import CustomUserManager
 

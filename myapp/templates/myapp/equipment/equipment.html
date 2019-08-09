@@ -31,37 +31,47 @@
                 {% endif %}
             </div>
             <div class="col-lg-8 col-sm-12">
-                <div class="progress mb-2" style="height: 2px">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25"
+                <div class="progress mb-0" style="height: 4px">
+                    <div class="progress-bar" role="progressbar"
+                        style="width: {{ lifetime }}%; background-color: #ed4d71" ; aria-valuenow="{{ lifetime }}"
                         aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
+                    </div>
+                    <p class="text-muted small text-right my-0">Niveau de vie théorique</p>
                 <table class="table-sm mx-2">
                     <tr>
-                        <td class="small font-weight-bold">Marque :</td>
+                        <td class="small font-weight-bold text-right">Marque :</td>
                         <td>{{ equipment.brand }}</td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold">Modèle :</td>
+                        <td class="small font-weight-bold text-right">Modèle :</td>
                         <td>{{ equipment.model }}</td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold">Prix TTC :</td>
-                        <td>{{ equipment.price }} euros</td>
+                        <td class="small font-weight-bold text-right align-top pt-2">Prix TTC :</td>
+                        <td>{{ equipment.price }} €
+                        <p class="text-muted small">Valeur résiduelle estimée : ~{{ wear_rate }} €</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold">Date d'achat :</td>
+                        <td class="small font-weight-bold text-right">Date d'achat :</td>
                         <td>{{ equipment.date_purchase }}</td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold">Garantie :</td>
-                        <td class="text-success">{{ equipment.length_warranty }} mois</td>
+                        <td class="small font-weight-bold text-right align-top pt-2">Garantie :</td>
+                        <td class="text-{{ state_warranty }}">{{ equipment.length_warranty }} mois
+                        <p class="text-muted small my-0">Date de fin de garantie : {{ end_warranty }}</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="small font-weight-bold">Categorie :</td>
+                        <td class="small font-weight-bold text-right">Categorie :</td>
                         <td>{{ equipment.category }}</td>
                     </tr>
+                    <tr>
+                        <td class="small font-weight-bold text-right">Note :
+                        <td>{{ equipment.note }}</td>
+                        </td>
+                    </tr>
                 </table>
-                <p class="mt-2">{{ equipment.note }}</p>
                 <div class="mt-2">
                     {% if equipment.invoice %}
                     <a class="btn btn-outline-primo btn-sm" href="{{ equipment.invoice.url }}" target="_blank">

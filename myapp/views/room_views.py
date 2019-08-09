@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
@@ -6,8 +8,9 @@ from django_tables2 import RequestConfig
 from django_tables2.export.export import TableExport
 
 from ..forms import RoomForm
+from ..libs.info_equipment import information
+from ..libs.tables import EquipmentTable
 from ..models import Equipment, Residence, Room
-from ..tables import EquipmentTable
 
 
 @login_required
@@ -130,11 +133,23 @@ def room_equipment(request, room_id, record):
     if get_equipment.room.residence in Residence.objects.filter(
             user=request.user):
         equipments = get_object_or_404(Equipment, id=get_equipment.id)
+        info = information(str(equipments.date_purchase),
+                           str(equipments.price),
+                           str(equipments.length_warranty),
+                           str(equipments.category))
+        if info.end_warranty > date.today():
+            state_warranty = 'success'
+        else:
+            state_warranty = 'danger'
     else:
         raise Http404()
 
     return render(request, 'myapp/equipment/equipment.html', {
         'equipment': equipments,
+        'lifetime': info.lifetime,
+        'end_warranty': info.end_warranty,
+        'wear_rate': info.wear_rate,
+        'state_warranty': state_warranty,
     })
 
 

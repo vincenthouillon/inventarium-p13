@@ -1,0 +1,81 @@
+{
+    "categories": [
+        {
+            "name": "gros électroménager",
+            "lifetime": 10,
+            "rate": [
+                100, 86, 72, 57, 43, 29, 14, 5, 0, 0, 0, 0
+            ]
+        },
+        {
+            "name": "petit électroménager",
+            "lifetime": 10,
+            "rate": [
+                100, 80, 60, 40, 20, 5, 0, 0, 0, 0, 0, 0
+            ]
+        },
+        {
+            "name": "télévision hifi",
+            "lifetime": 10,
+            "rate": [
+                100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0, 0
+            ]
+        },
+        {
+            "name": "informatique",
+            "lifetime": 5,
+            "rate": [
+                100, 80, 60, 40, 20, 5, 0, 0, 0, 0, 0, 0
+            ]
+        },
+        {
+            "name": "mobilier courant",
+            "lifetime": 8,
+            "rate": [
+                100, 86, 72, 57, 43, 29, 14, 5, 0, 0, 0, 0
+            ]
+        },
+        {
+            "name": "vêtements chaussures",
+            "lifetime": 4,
+            "rate": [
+                100, 66, 33, 5, 0, 0, 0, 0, 0, 0, 0, 0
+            ]
+        },
+        {
+            "name": "literie",
+            "lifetime": 10,
+            "rate": [
+                100, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
+            ]
+        },
+        {
+            "name": "vaisselle",
+            "lifetime": 10,
+            "rate": [
+                100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100
+            ]
+        },
+        {
+            "name": "objets de collection",
+            "lifetime": 10,
+            "rate": [
+                100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100
+            ]
+        },
+        {
+            "name": "disques jeux vidéos",
+            "lifetime": 4,
+            "rate": [
+                100, 60, 40, 20, 5, 0, 0, 0, 0, 0, 0, 0
+            ]
+        },
+        {
+            "name": "mobilier style",
+                "lifetime": 10,
+                "rate": [
+                    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100
+                ]
+            }
+    ]
+}

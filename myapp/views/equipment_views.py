@@ -1,9 +1,12 @@
+from datetime import date
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 
 from ..forms import EquipmentForm
+from ..libs.info_equipment import information
 from ..models import Equipment, Residence, Room
 
 
@@ -19,11 +22,24 @@ def equipment(request, equipment_id):
     if get_equipment.room.residence in Residence.objects.filter(
             user=request.user):
         equipments = get_object_or_404(Equipment, id=get_equipment.id)
+        
+        info = information(str(equipments.date_purchase),
+                           str(equipments.price),
+                           str(equipments.length_warranty),
+                           str(equipments.category))
+        if info.end_warranty > date.today():
+            state_warranty = 'success'
+        else:
+            state_warranty = 'danger'
     else:
         raise Http404()
 
     return render(request, 'myapp/equipment/equipment.html', {
         'equipment': equipments,
+        'lifetime': info.lifetime,
+        'end_warranty': info.end_warranty,
+        'wear_rate': info.wear_rate,
+        'state_warranty': state_warranty,
     })
 
 
@@ -50,7 +66,7 @@ def equipment_update(request, equipment_id):
                     'L\'équipement "{}" a bien été mis à jour.'.format(
                         form.name))
                 form.save()
-                return redirect('room', room_id=get_equipment.room.id)
+                return redirect('equipment', equipment_id=get_equipment.id)
         else:
             u_form = EquipmentForm(instance=get_equipment)
 

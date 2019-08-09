@@ -25,7 +25,7 @@
             {% for residence in residences %}
             <div class="card mb-2" style="max-width: 22rem;min-width: 14rem;">
                 <a href="{% url 'residence' residence.id %}">
-                    <img src="{% static 'img/houseCrossSection.jpg' %}" class="card-img-top" alt="...">
+                    <img src="{% static 'img/houseFacade.png' %}" class="card-img-top" alt="Facade de maison">
                     <div class="card-body">
                         <h5 class="card-title text-dark">{{ residence.name|capfirst }}</h5>
                         <p class="card-text m-0">{{ residence.adress|truncatechars:50 }}</p>
