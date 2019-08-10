@@ -5,13 +5,19 @@ python:
 # command to install dependencies
 before_script:
   - pip install -r requirements.txt
+  - psql -c 'create database inventarium;' -U postgres
 
 services:
   - postgresql
+
+addons:
+  - postgresql: "9.5"
 
 env: DJANGO_SETTINGS_MODULE="inventarium.settings.travis"
 
 # command to run tests
 script:
+  - python manage.py makemigrations myapp
+  - python manage.py migrate
   - python manage.py test
   
