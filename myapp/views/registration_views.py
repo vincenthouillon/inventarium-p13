@@ -194,7 +194,7 @@ def email(request):
                         form.cleaned_data['subject'],
                         form.cleaned_data['message'])
             try:
-                send_mail(subject, message, from_email,[EMAIL_HOST_USER])
+                send_mail(subject, message, from_email, [EMAIL_HOST_USER])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('email_success')

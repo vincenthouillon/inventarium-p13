@@ -93,9 +93,9 @@ class AuthAndDatabaseTestCase(TestCase):
         self.residence = Residence.objects.create(name='lorem', user=self.user)
         self.room = Room.objects.create(name='kitchen',
                                         residence=self.residence)
-        self.category = Category.objects.create(name='test')
+        self.category = Category.objects.create(name='télévision hifi')
         self.equipment = Equipment.objects.create(
-            name='tv', category=self.category, room=self.room)
+            name='tv', price='999.99', category=self.category, room=self.room)
 
     def test_homepage_response(self):
         self.client.login(**self.post)
