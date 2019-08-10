@@ -6,15 +6,12 @@ python:
 before_script:
   - pip install -r requirements.txt
 
-env:
-  - DJANGO=2.4
-
 services:
   - postgresql
 
-before_install:
-  -DJANGO_SETTINGS_MODULE="inventarium.settings.travis"
+env: DJANGO_SETTINGS_MODULE="inventarium.settings.travis"
 
 # command to run tests
 script:
-  - ./manage.py test
+  - python manage.py test
+  
