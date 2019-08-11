@@ -36,6 +36,9 @@ class ContactForm(forms.Form):
 
 
 class EquipmentForm(forms.ModelForm):
+    date_purchase = forms.DateField(
+        help_text='Format date : 26/10/1985'
+    )
     class Meta:
         model = Equipment
         exclude = ['room']

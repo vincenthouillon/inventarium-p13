@@ -90,7 +90,7 @@ def equipment_delete(request, equipment_id):
     if get_equipment.room.residence in Residence.objects.filter(
             user=request.user):
         if request.method == 'POST':
-            equipment = Equipment.objects.get(id=get_equipment)
+            equipment = Equipment.objects.get(id=get_equipment.id)
             equipment.delete()
     return redirect('room', room_id=get_equipment.room.id)
 

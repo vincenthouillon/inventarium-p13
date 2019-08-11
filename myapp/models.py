@@ -113,7 +113,7 @@ class Equipment(models.Model):
         "date d'achat", blank=True, default=datetime.now)
     length_warranty = models.IntegerField(
         "durée de garantie", null=True, help_text="Durée exprimée en mois",
-        default="48", blank=True)
+        default="24", blank=True)
     note = models.TextField("note", null=True, blank=True)
     picture = models.ImageField(
         upload_to="equipments/picture", null=True, blank=True,
