@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from sentry_sdk import capture_message
 
 from inventarium.settings import EMAIL_HOST_USER
 
@@ -37,6 +38,7 @@ def signup(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
+            capture_message(user.email, level='info')  # sentry log
             user.save()
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             token = account_activation_token.make_token(user.pk)
@@ -61,6 +63,7 @@ def signup(request):
         'form': form,
         'title': "S'enregister"
     }
+
     return render(request, template_name, context)
 
 
@@ -116,6 +119,7 @@ def signin(request):
 
     form = AuthenticationForm()
 
+    capture_message(EMAIL_HOST_USER, level='info')  # sentry log
     return render(request=request,
                   template_name="myapp/user/signin.html",
                   context={"form": form})
