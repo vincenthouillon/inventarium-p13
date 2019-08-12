@@ -4,7 +4,7 @@ from django.contrib.auth import (authenticate, get_user_model, login, logout,
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import BadHeaderError, EmailMessage, send_mail
+from django.core.mail import BadHeaderError, EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -48,7 +48,7 @@ def signup(request):
             mail = EmailMessage(
                 subject="Inventarium: Confirmation de l'inscription",
                 body=render_to_string("myapp/user/activate_account.html",
-                                      context=email_context),
+                                         context=email_context),            
                 from_email='admin@inventarium.me',
                 to=[user.email]
             )
@@ -106,16 +106,16 @@ def signin(request):
                       user,
                       backend='django.contrib.auth.backends.ModelBackend')
                 messages.info(
-                    request, "Vous êtes connecté {}".format(email))
+                    request, 'Vous êtes connecté {}'.format(email))
                 return redirect('homepage')
             else:
                 messages.error(
-                    request, "Email ou mot de passe invalide.",
-                    "danger")
+                    request, 'Email ou mot de passe invalide.',
+                    'danger')
         else:
             messages.error(
-                request, "Email ou mot de passe invalide.",
-                "danger")
+                request, 'Email ou mot de passe invalide.',
+                'danger')
 
     form = AuthenticationForm()
 
@@ -128,7 +128,7 @@ def signin(request):
 def signout(request):
     """User disconnection."""
     logout(request)
-    messages.info(request, 'Vous êtes déconnecté avec succès...')
+    messages.info(request, 'Vous êtes déconnecté avec succès...', 'success')
     return redirect('index')
 
 
@@ -145,7 +145,8 @@ def account_update(request):
         u_form = CustomUserChangeForm(request.POST, instance=request.user)
         if u_form.is_valid():
             u_form.save()
-            messages.success(request, f'Votre compte a bien été mis à jour.')
+            messages.success(request, f'Votre compte a bien été mis à jour.',
+                             'success')
             return redirect('account')
     else:
         u_form = CustomUserChangeForm(instance=request.user)
@@ -163,10 +164,11 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(
-                request, 'Your password was successfully updated!')
-            return redirect('change_password')
+                request, 'Votre mot de passe a bien été mis à jour', 'success')
+            return redirect('account')
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.error(request, 'Veuillez corriger l\'erreur ci-dessous.',
+                           'danger')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'myapp/user/change_password.html', {
@@ -180,7 +182,7 @@ def user_delete(request):
     user = request.user
     user.delete()
     logout(request)
-    messages.success(request, 'Votre compte est supprimé.')
+    messages.success(request, 'Votre compte est supprimé.', 'success')
     return redirect('index')
 
 

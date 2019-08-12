@@ -110,7 +110,8 @@ class Equipment(models.Model):
     price = models.DecimalField("prix", max_digits=6, decimal_places=2,
                                 null=True, blank=True)
     date_purchase = models.DateField(
-        "date d'achat", blank=True, default=datetime.now)
+        "date d'achat", blank=True, default=datetime.now,
+        help_text='Format date : 26/10/1985')
     length_warranty = models.IntegerField(
         "durée de garantie", null=True, help_text="Durée exprimée en mois",
         default="24", blank=True)

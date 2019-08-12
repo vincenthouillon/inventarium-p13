@@ -115,6 +115,7 @@ def equipment_add(request, room_id):
                 return redirect('room', room_id=get_room.id)
             else:
                 u_form = EquipmentForm()
+                messages.error(request, "Erreur de saisie du formulaire", "danger")
 
         return render(request, 'myapp/equipment/equipment_add.html', {
             'form': EquipmentForm,
