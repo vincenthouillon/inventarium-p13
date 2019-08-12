@@ -108,7 +108,7 @@ class Equipment(models.Model):
     brand = models.CharField("marque", max_length=30, null=True, blank=True)
     model = models.CharField("modèle", max_length=40, null=True, blank=True)
     price = models.DecimalField("prix", max_digits=6, decimal_places=2,
-                                null=True, blank=True)
+                                null=True, blank=True, default=0.00)
     date_purchase = models.DateField(
         "date d'achat", blank=True, default=datetime.now,
         help_text='Format date : 26/10/1985')
