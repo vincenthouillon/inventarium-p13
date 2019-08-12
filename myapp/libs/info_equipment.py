@@ -1,7 +1,8 @@
 import json
-from datetime import date
-from dateutil.relativedelta import relativedelta
 import os
+from datetime import date
+
+from dateutil.relativedelta import relativedelta
 
 TODAY = date.today()
 
@@ -23,11 +24,11 @@ class information:
     """
 
     def __init__(self, date_purchase, price, length_warranty, category):
-        self.date_purchase   = date_purchase
-        self.price           = float(price)
+        self.date_purchase = date_purchase
+        self.price = float(price)
         self.length_warranty = int(length_warranty)
-        self.category        = category
-        self.equipment       = self.__read_json_and_return_dict()
+        self.category = category
+        self.equipment = self.__read_json_and_return_dict()
 
     def __read_json_and_return_dict(self):
         """
@@ -42,14 +43,13 @@ class information:
 
         equipment = dict()
         for category in data['categories']:
-            name            = category['name']
-            lifetime        = category['lifetime']
-            rate            = category['rate']
+            name = category['name']
+            lifetime = category['lifetime']
+            rate = category['rate']
 
             equipment[name] = lifetime, rate
 
         return equipment
-    
 
     def __parse_date(self):
         """Text converter to date.
@@ -57,7 +57,7 @@ class information:
             Transform '1985-10-26' to 'date(1985,10,26)'.
         """
         d_year, d_month, d_day = self.date_purchase.split('-')
-        date_purchase =date(int(d_year), int(d_month), int(d_day))
+        date_purchase = date(int(d_year), int(d_month), int(d_day))
 
         return date_purchase
 
