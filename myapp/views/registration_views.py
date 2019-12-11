@@ -4,7 +4,7 @@ from django.contrib.auth import (authenticate, get_user_model, login, logout,
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import BadHeaderError, EmailMessage
+from django.core.mail import BadHeaderError, EmailMessage, send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
